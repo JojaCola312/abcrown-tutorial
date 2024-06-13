@@ -317,13 +317,12 @@ class BoundedSequential(nn.Sequential):
                         # alpha_optimizer.add_param_group({'params': list(module.beta_l.values()),'lr': lr_b})
                         beta_optimizer.add_param_group({'params': list(module.beta_u.values()),'lr': lr_b})
                         beta_optimizer.add_param_group({'params': list(module.beta_l.values()),'lr': lr_b})
-            # 打印 alpha_optimizer 中的参数
+
             print("Parameters in alpha_optimizer:")
             for param_group in alpha_optimizer.param_groups:
                 for param in param_group['params']:
                     print(param, param.requires_grad)
 
-            # 打印 beta_optimizer 中的参数
             print("Parameters in beta_optimizer:")
             for param_group in beta_optimizer.param_groups:
                 for param in param_group['params']:
