@@ -318,17 +318,17 @@ class BoundedSequential(nn.Sequential):
                         beta_optimizer.add_param_group({'params': list(module.beta_u.values()),'lr': lr_b})
                         beta_optimizer.add_param_group({'params': list(module.beta_l.values()),'lr': lr_b})
 
-            print("Parameters in alpha_optimizer:")
-            for param_group in alpha_optimizer.param_groups:
-                for param in param_group['params']:
-                    print(param, param.requires_grad)
+            # print("Parameters in alpha_optimizer:")
+            # for param_group in alpha_optimizer.param_groups:
+            #     for param in param_group['params']:
+            #         print(param, param.requires_grad)
 
-            print("Parameters in beta_optimizer:")
-            for param_group in beta_optimizer.param_groups:
-                for param in param_group['params']:
-                    print(param.size(), param.requires_grad)
+            # print("Parameters in beta_optimizer:")
+            # for param_group in beta_optimizer.param_groups:
+            #     for param in param_group['params']:
+            #         print(param.size(), param.requires_grad)
             
-            iter = 300
+            iter = 50
             best_lb, best_ub = lb, ub
             best_loss = np.inf
             for j in range(iter):
@@ -398,10 +398,10 @@ class BoundedSequential(nn.Sequential):
                     if isinstance(node, BoundReLU):
                         node.clip_beta()
                 
-                print(alpha_loss)
+                # print(beta_loss)
             for module in modules:
                 if isinstance(module, BoundHardTanh) or isinstance(module, BoundReLU):
-                    print('list')
+                    print('Stored List')
                     print('Alpha',module.alpha_l_list)
                     print('Beta',module.beta_l_list)
             print('best_lb:',best_lb)
@@ -613,6 +613,6 @@ def main():
                 j=j, i=i, l=lb[i][j].item(), u=ub[i][j].item()))
 
 from contextlib import redirect_stdout
-with open('try.txt', 'w') as f:
+with open('alpha_beta_lb_oa.txt', 'w') as f:
     with redirect_stdout(f):
         main()

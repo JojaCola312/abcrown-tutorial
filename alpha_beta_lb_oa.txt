@@ -1,0 +1,3182 @@
+use ReLU model
+Network prediction: tensor([[2., 0.]], device='cuda:0', grad_fn=<AddmmBackward0>)
+Verifiying Pertubation - 1
+the num of relu: 1
+using beta-CROWN
+name: 0
+using alpha-CROWN
+tensor(True, device='cuda:0')
+True
+True
+name: 1
+
+
+C [(tensor([[-3., -3.]], device='cuda:0'), tensor([[0., 3.]], device='cuda:0'))]
+split: [tensor([[1., 0.],
+        [0., 0.]], device='cuda:0')]
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.3216, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.3716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.4216, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.4716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.5216, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.5716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.6216, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.6716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.7216, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.7716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.8216, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.8716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.9216, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.9716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+Stored List
+Alpha OrderedDict([(0, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))])), (1, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))]))])
+Beta OrderedDict([(0, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))])), (1, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))]))])
+best_lb: tensor([[-1.,  0.]], device='cuda:0', grad_fn=<MaximumBackward0>)
+name: 2
+
+
+C [(tensor([[ 0., -3.]], device='cuda:0'), tensor([[3., 3.]], device='cuda:0'))]
+split: [tensor([[-1.,  0.],
+        [ 0.,  0.]], device='cuda:0')]
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2216, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.1716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.1216, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.0716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.0216, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+Stored List
+Alpha OrderedDict([(0, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))])), (1, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))])), (2, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))]))])
+Beta OrderedDict([(0, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))])), (1, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))])), (2, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))]))])
+best_lb: tensor([[-1.,  0.]], device='cuda:0', grad_fn=<MaximumBackward0>)
+1 2
+name: 3
+
+
+C [(tensor([[-3., -3.]], device='cuda:0'), tensor([[0., 0.]], device='cuda:0'))]
+split: [tensor([[1., 0.],
+        [0., 1.]], device='cuda:0')]
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[2., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+Stored List
+Alpha OrderedDict([(0, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))])), (1, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))])), (2, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))])), (3, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))]))])
+Beta OrderedDict([(0, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))])), (1, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))])), (2, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))])), (3, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))]))])
+best_lb: tensor([[2., 0.]], device='cuda:0', grad_fn=<MaximumBackward0>)
+name: 4
+
+
+C [(tensor([[-3.,  0.]], device='cuda:0'), tensor([[0., 3.]], device='cuda:0'))]
+split: [tensor([[ 1.,  0.],
+        [ 0., -1.]], device='cuda:0')]
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.3216, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.3716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.4216, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.4716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.5216, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.5716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.6216, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.6716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.7216, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.7716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.8216, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.8716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.9216, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.9716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[1., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+Stored List
+Alpha OrderedDict([(0, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))])), (1, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))])), (2, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))])), (3, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))])), (4, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))]))])
+Beta OrderedDict([(0, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))])), (1, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))])), (2, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))])), (3, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))])), (4, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))]))])
+best_lb: tensor([[-1.,  0.]], device='cuda:0', grad_fn=<MaximumBackward0>)
+name: 5
+
+
+C [(tensor([[ 0., -3.]], device='cuda:0'), tensor([[3., 0.]], device='cuda:0'))]
+split: [tensor([[-1.,  0.],
+        [ 0.,  1.]], device='cuda:0')]
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2216, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.1716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.1216, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.0716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.0216, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[-1.,  0.]], device='cuda:0', grad_fn=<AddBackward0>)
+Stored List
+Alpha OrderedDict([(0, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))])), (1, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))])), (2, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))])), (3, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))])), (4, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))])), (5, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))]))])
+Beta OrderedDict([(0, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))])), (1, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))])), (2, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))])), (3, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))])), (4, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))])), (5, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))]))])
+best_lb: tensor([[-1.,  0.]], device='cuda:0', grad_fn=<MaximumBackward0>)
+name: 6
+
+
+C [(tensor([[0., 0.]], device='cuda:0'), tensor([[3., 3.]], device='cuda:0'))]
+split: [tensor([[-1.,  0.],
+        [ 0., -1.]], device='cuda:0')]
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.2216, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.1716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.1216, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.0716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0.0216, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+alpha
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+beta
+odict_values([Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True)])
+lb
+tensor([[0., 0.]], device='cuda:0', grad_fn=<AddBackward0>)
+Stored List
+Alpha OrderedDict([(0, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))])), (1, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))])), (2, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))])), (3, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))])), (4, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))])), (5, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))])), (6, OrderedDict([(2, Parameter containing:
+tensor([[[0.2716, 0.0000],
+         [0.0000, 0.0000]]], device='cuda:0', requires_grad=True))]))])
+Beta OrderedDict([(0, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))])), (1, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))])), (2, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))])), (3, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))])), (4, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))])), (5, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))])), (6, OrderedDict([(2, Parameter containing:
+tensor([[[0., 0.],
+         [0., 0.]]], device='cuda:0', requires_grad=True))]))])
+best_lb: tensor([[0., 0.]], device='cuda:0', grad_fn=<MaximumBackward0>)
+2 4
+f_0(x_0):   2.0000 <= f_0(x_0+delta) <=   2.0000
+f_1(x_0):   0.0000 <= f_1(x_0+delta) <=   0.0000
