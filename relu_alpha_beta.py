@@ -16,16 +16,30 @@ class BoundReLU(nn.ReLU):
         self.init_beta_u = None
         self.init_beta_l = None
 
-        self.store_u = OrderedDict()
-        self.store_l = OrderedDict()
-        self.store_beta_u = OrderedDict()
-        self.store_beta_l = OrderedDict()
-
         self.S = None
         self.beta_l_list = OrderedDict()
         self.alpha_l_list = OrderedDict()
         self.beta_u_list = OrderedDict()
         self.alpha_u_list = OrderedDict()
+
+        self.last_lA = None
+        self.last_uA = None
+        self.lA = None
+        self.uA = None
+        self.lbias = None
+        self.ubias = None
+        self.upper_b = None
+        self.lb = None
+        self.ub = None
+        
+        self.last_lA_list = OrderedDict()
+        self.last_uA_list = OrderedDict()
+        self.lA_list = OrderedDict()
+        self.uA_list = OrderedDict()
+        self.lbias_list = OrderedDict()
+        self.ubias_list = OrderedDict()
+        self.upper_b_list = OrderedDict()
+
 
     @staticmethod
     def convert(act_layer):
@@ -60,21 +74,13 @@ class BoundReLU(nn.ReLU):
 
             lbias (tensor): The bias (for lower bound) produced by this layer.
         """
+
         # lb_r and ub_r are the bounds of input (pre-activation)
         # Here the clamping oepration ensures the results are correct for stable neurons.
         lb_r = self.lower_l.clamp(max=0)
         ub_r = self.upper_u.clamp(min=0)
         if(self.S == None):
             self.S = torch.zeros(self.lower_l.shape[1],self.lower_l.shape[1])
-        # if(optimize==True):
-        #     for i in range(self.lower_l.shape[1]):
-        #         l, u = self.lower_l[0,i], self.upper_u[0,i]
-        #         if(self.split[0,i]==1):
-        #             if(l == 0):
-        #                 self.S[i,i] = -1
-        #             elif(u == 0):
-        #                 self.S[i,i] = 1
-            # print(S)
 
         # avoid division by 0 when both lb_r and ub_r are 0
         ub_r = torch.max(ub_r, lb_r + 1e-8)
@@ -101,8 +107,6 @@ class BoundReLU(nn.ReLU):
             self.alpha_l[start_node].requires_grad_()
             self.alpha_u[start_node] = nn.Parameter(self.alpha_u[start_node])
             self.alpha_u[start_node].requires_grad_()
-            self.store_l[start_node] = self.init_l.repeat(1, out_features, 1)
-            self.store_u[start_node] = self.init_u.repeat(1, out_features, 1)
 
 
 
@@ -112,22 +116,22 @@ class BoundReLU(nn.ReLU):
             self.beta_l[start_node].requires_grad_()
             self.beta_u[start_node] = nn.Parameter(self.beta_u[start_node])
             self.beta_u[start_node].requires_grad_()
-            self.store_beta_l[start_node] = self.init_beta_l.repeat(1, out_features, 1)
-            self.store_beta_u[start_node] = self.init_beta_u.repeat(1, out_features, 1)
 
         lb_lower_d = self.alpha_l[start_node].clone().detach()
         ub_lower_d = self.alpha_u[start_node].clone().detach()
-        # lb_lower_d[0] = self.alpha_l[start_node][0]
-        # ub_lower_d[0] = self.alpha_u[start_node][0]
-        lb_lower_d[0] = self.modify_lb(self.S, self.alpha_l[start_node][0])
-        ub_lower_d[0] = self.modify_lb(self.S, self.alpha_u[start_node][0])
 
+        self.inact_alpha(start_node)
+        lb_lower_d[0] = self.alpha_l[start_node][0]
+        ub_lower_d[0] = self.alpha_u[start_node][0]
+
+        # lb_lower_d[0] = self.modify_lb(self.alpha_l[start_node][0])
+        # ub_lower_d[0] = self.modify_lb(self.alpha_u[start_node][0])
 
         lb_beta = self.beta_l[start_node].clone().detach()
         ub_beta = self.beta_u[start_node].clone().detach()
         lb_beta[0] = self.beta_l[start_node][0]
         ub_beta[0] = self.beta_u[start_node][0]
-
+        # print(lb_lower_d.shape, lb_beta.shape)
         uA = lA = None
         ubias = lbias = 0
         device = torch.device('cuda')
@@ -155,6 +159,15 @@ class BoundReLU(nn.ReLU):
             # New bias term.
             mult_lA = neg_lA.view(last_lA.size(0), last_lA.size(1), -1)
             lbias = mult_lA.matmul(upper_b.view(upper_b.size(0), -1, 1)).squeeze(-1)
+        
+        self.last_lA = last_lA
+        self.last_uA = last_uA
+        self.lA = lA
+        self.uA = uA
+        self.lbias = lbias
+        self.ubias = ubias
+        self.upper_b = upper_b
+
         return uA, ubias, lA, lbias
 
     def clip_alpha(self):
@@ -165,6 +178,7 @@ class BoundReLU(nn.ReLU):
             v.data = torch.clamp(v.data, 0, 1)
         for v in self.alpha_u.values():
             v.data = torch.clamp(v.data, 0, 1)
+        
     def clip_beta(self):
         r"""Clip alphas after an single update.
         Alpha should be bewteen 0 and 1.
@@ -173,47 +187,77 @@ class BoundReLU(nn.ReLU):
             v.data = torch.clamp(v.data, min=0)
         for v in self.beta_u.values():
             v.data = torch.clamp(v.data, min=0)
-    # def initialize_alpha(self):
-    #     for v,u in zip(self.alpha_l.values(),self.store_l.values()):
-    #         v.data.copy_(u)
-    #     for v,u in zip(self.alpha_u.values(),self.store_u.values()):
-    #         v.data.copy_(u)
-    # def initialize_beta(self):
-    #     for v,u in zip(self.beta_l.values(),self.store_beta_l.values()):
-    #         v.data.copy_(u)
-    #     for v,u in zip(self.beta_u.values(),self.store_beta_u.values()):
-    #         v.data.copy_(u)
+
     def initialize_alpha(self,name):
         if(name == 0):
-            return
-        for v,u in zip(self.alpha_l.values(),self.alpha_l_list[(name-1)//2].values()):
-            v.data.copy_(u)
-        for v,u in zip(self.alpha_u.values(),self.alpha_u_list[(name-1)//2].values()):
-            v.data.copy_(u)
+            for v in self.alpha_l.values():
+                v.data.copy_(self.init_l.expand_as(v))
+            for v in self.alpha_u.values():
+                v.data.copy_(self.init_u.expand_as(v))
+        else:
+            for v,u in zip(self.alpha_l.values(),self.alpha_l_list[(name-1)//2].values()):
+                v.data.copy_(u)
+            for v,u in zip(self.alpha_u.values(),self.alpha_u_list[(name-1)//2].values()):
+                v.data.copy_(u)
+
     def initialize_beta(self,name):
         if(name == 0):
             return
+        for v,u in zip(self.beta_l.values(),self.beta_l_list[0].values()):
+            v.data.copy_(u)
+        for v,u in zip(self.beta_u.values(),self.beta_u_list[0].values()):
+            v.data.copy_(u)
+        return
         for v,u in zip(self.beta_l.values(),self.beta_l_list[(name-1)//2].values()):
             v.data.copy_(u)
         for v,u in zip(self.beta_u.values(),self.beta_u_list[(name-1)//2].values()):
             v.data.copy_(u)
+
     def update_l(self,name):
         self.beta_l_list[name] = copy.deepcopy(self.beta_l)
         self.alpha_l_list[name] = copy.deepcopy(self.alpha_l)
+
+        self.last_lA_list[name] = self.last_lA.clone()
+        self.lA_list[name] = self.lA.clone()
+        self.lbias_list[name] = self.lbias.clone()
+        self.upper_b_list[name] = self.upper_b.clone()
     def update_u(self,name):
         self.beta_u_list[name] = copy.deepcopy(self.beta_u)
         self.alpha_u_list[name] = copy.deepcopy(self.alpha_u)
 
+        self.last_uA_list[name] = self.last_uA.clone()
+        self.uA_list[name] = self.uA.clone()
+        self.ubias_list[name] = self.ubias.clone()
+        self.upper_b_list[name] = self.upper_b.clone()
 
-    def modify_lb(self, S, lbs):
-        d = torch.diag(S)
-        mask_neg1 = (d == -1)
-        mask_pos1 = (d == 1)
-        # for i in range(lbs.shape[0]):
-        #     lbs[i][mask_neg1] = 1
-        #     lbs[i][mask_pos1] = 0
+
+    def modify_lb(self, lbs):
+        # d = torch.diag(S)
+        # mask_neg1 = (d == -1)
+        # mask_pos1 = (d == 1)
+        
+        lb = self.lower_l
+        ub = self.upper_u
+        mask_neg1 = (lb >= 0)
+        mask_pos1 = (ub <= 0)
+
         lbs = lbs.clone()
         with torch.no_grad():
             lbs[mask_neg1.expand_as(lbs)] = 1
             lbs[mask_pos1.expand_as(lbs)] = 0
         return lbs
+
+    def inact_alpha(self, start_node):
+        # d = torch.diag(self.S)
+        # mask_neg1 = (d == -1)
+        # mask_pos1 = (d == 1)
+        lb = self.lower_l
+        ub = self.upper_u
+        mask_neg1 = (lb >= 0)
+        mask_pos1 = (ub <= 0)
+
+        with torch.no_grad():
+            self.alpha_l[start_node][0][mask_neg1.expand_as(self.alpha_l[start_node][0])] = 1
+            self.alpha_u[start_node][0][mask_neg1.expand_as(self.alpha_u[start_node][0])] = 1
+            self.alpha_l[start_node][0][mask_pos1.expand_as(self.alpha_l[start_node][0])] = 0
+            self.alpha_u[start_node][0][mask_pos1.expand_as(self.alpha_u[start_node][0])] = 0

@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+from torch.nn import functional as F
 import numpy as np
 from model import SimpleNNRelu, SimpleNNHardTanh, two_relu_toy_model
 from linear import BoundLinear
@@ -98,6 +99,7 @@ class BoundedSequential(nn.Sequential):
                 return False
             return True
         for P, split_list in zip(C_list, split_lists):
+            #if all valid, then all splitted
             all_valid = all(is_valid_diagonal_matrix(matrix) for matrix in split_list)
             if(all_valid):
                 continue
@@ -107,35 +109,31 @@ class BoundedSequential(nn.Sequential):
             split_bool_1, split_bool_2 = deep_copy_structure(split_list), deep_copy_structure(split_list)
             rank_list = []
             i = 0
-            #each C is the bound for 
+            #calculate the score of all possible split for each C, here just ub-lb
             for single_C in C:
                 lb, ub = single_C[0].detach().cpu().numpy(), single_C[1].detach().cpu().numpy()
                 mask = (lb < 0) & (ub > 0)
+                # if(not mask.any()):
+                #     continue
                 diff = ub - lb
                 masked_diff = np.where(mask, diff, -np.inf)
                 max_index = np.unravel_index(np.argmax(masked_diff), masked_diff.shape)
                 max_diff = masked_diff[max_index]
+                #i for index of the relu in the whole model, max_index for the lb index in a certain relu, max_diff is the score
                 rank_list.append((max_diff,max_index,i))
                 i += 1
+            # if(len(rank_list)==0):
+            #     continue
             sorted_rank = sorted(rank_list, key=lambda x: x[0], reverse=True)
             max_range_term = sorted_rank[0]
+            #change ub
             C_1[max_range_term[2]][1][max_range_term[1]] = 0
+            #change lb
             C_2[max_range_term[2]][0][max_range_term[1]] = 0
 
-            # split_bool_1[max_range_term[2]][1][max_range_term[1]] = 1
-            # split_bool_1[max_range_term[2]][0][max_range_term[1]] = 1
-            # split_bool_2[max_range_term[2]][1][max_range_term[1]] = 1
-            # split_bool_2[max_range_term[2]][0][max_range_term[1]] = 1
-            # numpy_list = [tensor.cpu().numpy() for tensor in split_bool_1]
-            # nonzero_counts = [np.count_nonzero(arr) for arr in numpy_list]
-            # print('before',nonzero_counts)
-            # print(max_range_term[1][1])
             split_bool_1[max_range_term[2]][max_range_term[1][1],max_range_term[1][1]] = 1
             split_bool_2[max_range_term[2]][max_range_term[1][1],max_range_term[1][1]] = -1
 
-            # numpy_list = [tensor.cpu().numpy() for tensor in split_bool_1]
-            # nonzero_counts = [np.count_nonzero(arr) for arr in numpy_list]
-            # print('after',nonzero_counts)
             C_split.append(C_1)
             C_split.append(C_2)
             split_bool_list.append(split_bool_1)
@@ -145,10 +143,138 @@ class BoundedSequential(nn.Sequential):
 
         return C_split, split_bool_list, name_list
 
+
+    def general_split(self, C_list, split_lists, split_depth):
+        C_split = []
+        split_bool_list = []
+        name_list = []
+        relu_list = []
+        linear_list = []
+        modules = list(self._modules.values())
+        for i, module in enumerate(modules):
+            if isinstance(module, BoundReLU):
+                relu_list.append(module)
+                linear_list.append(modules[i-1])
+        def is_valid_diagonal_matrix(matrix):
+            n = matrix.shape[0]
+            diag_mask = torch.eye(n, dtype=bool)
+            diag_elements = matrix[diag_mask]
+            off_diag_elements = matrix[~diag_mask]
+            if not torch.all(off_diag_elements == 0):
+                return False
+            if not torch.all((diag_elements == 1) | (diag_elements == -1)):
+                return False
+            return True
+        for P, split_list in zip(C_list, split_lists):
+            #if all valid, then all splitted
+            all_valid = all(is_valid_diagonal_matrix(matrix) for matrix in split_list)
+            if(all_valid):
+                continue
+            _, _, C, name = P
+            num_relu = len(C)
+            C_1, C_2 = deep_copy_structure(C), deep_copy_structure(C)
+            split_bool_1, split_bool_2 = deep_copy_structure(split_list), deep_copy_structure(split_list)
+            rank_list = []
+            i = 0
+            #calculate the score of all possible split for each C, here just ub-lb
+            for single_C, module, linear in zip(C, relu_list, linear_list):
+                lb, ub = single_C[0].clone().detach(), single_C[1].clone().detach()
+                # lb, ub = module.lower_l, module.upper_u
+                
+                mask = (lb < 0) & (ub > 0)
+                score = self.babsr_score(module, linear, name, lb, ub)
+                score = score.mean(1)
+                score = torch.where(mask, score, torch.tensor(-float('inf'), device=device))
+                print('score:',score)
+
+                # max_index = torch.unravel_index(torch.argmax(score), score.shape)
+                # max_score = score[max_index]
+                # #i for index of the relu in the whole model, max_index for the lb index in a certain relu, max_diff is the score
+                # rank_list.append((max_score,max_index,i))
+
+                topk_scores, topk_indices = torch.topk(score.view(-1), split_depth)
+                max_indices = torch.unravel_index(topk_indices, score.shape)
+                for idx, max_score in enumerate(topk_scores): 
+                    max_index = (max_indices[0][idx], max_indices[1][idx])
+                    rank_list.append((max_score, max_index, i))
+                i += 1
+            # if(len(rank_list)==0):
+            #     continue
+            sorted_rank = sorted(rank_list, key=lambda x: x[0], reverse=True)
+            # max_range_term = sorted_rank[0]
+            max_range_terms = sorted_rank[:split_depth]
+
+            #change ub
+            for max_range_term in max_range_terms:
+                C_1[max_range_term[2]][1][max_range_term[1]] = 0
+                #change lb
+                C_2[max_range_term[2]][0][max_range_term[1]] = 0
+
+                split_bool_1[max_range_term[2]][max_range_term[1][1],max_range_term[1][1]] = 1
+                split_bool_2[max_range_term[2]][max_range_term[1][1],max_range_term[1][1]] = -1
+
+                C_split.append(C_1)
+                C_split.append(C_2)
+                split_bool_list.append(split_bool_1)
+                split_bool_list.append(split_bool_2)
+                name_list.append(name*2+1)
+                name_list.append(name*2+2)
+
+        return C_split, split_bool_list, name_list
+
+    def babsr_score(self, module, linear, name, lb, ub):
+        print('name',lb, ub)
+        def compute_ratio(lb, ub):
+            lower_temp = lb.clamp(max=0)
+            upper_temp = F.relu(ub)
+            slope_ratio = upper_temp / (upper_temp - lower_temp)
+            intercept = -1 * lower_temp * slope_ratio
+            return slope_ratio, intercept
+        ratio = module.last_lA_list[name]
+        ratio_temp_0, ratio_temp_1 = compute_ratio(lb, ub)
+        intercept_temp = torch.clamp(ratio, max=0)
+        intercept_candidate = intercept_temp * ratio_temp_1.unsqueeze(1)
+        # b_temp = module.upper_b_list[name]
+        b_temp = linear.bias
+        # In some cases, bias=0, we can't treat it like tensors
+        # if not isinstance(b_temp, int):
+        #     b_temp = b_temp.view(-1, *([1] * (ratio.ndim - 3)))
+        print('btemp',b_temp.shape,b_temp)
+        print('ratio',ratio.shape,ratio)
+        print('ratio_temp_0',ratio_temp_0.shape,ratio_temp_0)
+        print('ratio_temp_1',ratio_temp_1.shape,ratio_temp_1)
+        b_temp = b_temp * ratio
+        ratio_temp_0 = ratio_temp_0.unsqueeze(1)
+        bias_candidate_1 = b_temp * (ratio_temp_0 - 1)
+        bias_candidate_2 = b_temp * ratio_temp_0
+        bias_candidate = torch.max(bias_candidate_1, bias_candidate_2)  # max for babsr by default
+        score_candidate = (bias_candidate + intercept_candidate).abs()
+        return score_candidate
+
+
+    def get_C(self, old_C, labels):
+
+        batch_size, out_features, _ = old_C.shape
+        
+        new_C = torch.zeros((batch_size, out_features - 1, out_features), device=old_C.device)
+        # new_C = torch.zeros((batch_size, out_features, out_features), device=old_C.device)
+        
+        for b in range(batch_size):
+            label = labels[b]
+            row_indices = [i for i in range(out_features) if i != label]
+
+            # row_indices = [i for i in range(out_features)]
+            
+            for i, row in enumerate(row_indices):
+                new_C[b, i, row] = -1
+            new_C[b, :, label] = 1
+            # new_C[b, label, label] = 0
+        print(new_C)
+        return new_C
+
     def compute_bound(self, P, b, method):
         d = 'OK'
         if(len(P)==0):
-            print('empty P')
             d = 'END'
         
 
@@ -168,7 +294,6 @@ class BoundedSequential(nn.Sequential):
             return upper_bound, d
 
     def optimized_beta_CROWN(self, C, split, x_U=None, x_L=None, upper=True, lower=True, optimize=1, name=0):
-        print('name:', name)
         modules = list(self._modules.values())
         # CROWN propagation for all layers
         ind = 0
@@ -180,10 +305,6 @@ class BoundedSequential(nn.Sequential):
             if isinstance(node, BoundReLU):
                 node.initialize_beta(name)
                 node.initialize_alpha(name)
-        # for module in modules:
-        #     if isinstance(module, BoundHardTanh) or isinstance(module, BoundReLU):
-        #         print(module.beta_l.values())
-        #         print(module.beta_u.values())
         # numpy_list = [tensor.cpu().numpy() for tensor in split]
         # nonzero_counts = [np.count_nonzero(arr) for arr in numpy_list]
         # print(nonzero_counts)
@@ -194,14 +315,18 @@ class BoundedSequential(nn.Sequential):
                 modules[i].upper_u = C[ind][1]
                 modules[i].lower_l = C[ind][0]
                 modules[i].S = split[ind]
-
-                nonzero_counts = np.count_nonzero(modules[i].S.cpu())
-                # print(i, nonzero_counts)
                 ind += 1
         # Get the final layer bound
+        C_matrix = self.get_C(torch.eye(modules[i].out_features).unsqueeze(0).to(x_U),self.labels)
+
+        # ub, lb = self.boundpropogate_from_layer(x_U=x_U, x_L=x_L,
+        #                                       C=torch.eye(modules[i].out_features).unsqueeze(0).to(x_U), upper=upper,
+        #                                       lower=lower, start_node=i, optimize=0)
+
         ub, lb = self.boundpropogate_from_layer(x_U=x_U, x_L=x_L,
-                                              C=torch.eye(modules[i].out_features).unsqueeze(0).to(x_U), upper=upper,
-                                              lower=lower, start_node=i, optimize=0)
+                                              C=C_matrix, upper=upper,
+                                              lower=lower, start_node=i, optimize=0, out_features = modules[i].out_features-1)
+
         if(optimize==0):
             print('using CROWN')
             return ub, lb
@@ -218,106 +343,182 @@ class BoundedSequential(nn.Sequential):
                     else:
                         optimizer.add_param_group({'params': list(module.alpha_l.values()),'lr': lr})
                         optimizer.add_param_group({'params': list(module.alpha_u.values()),'lr': lr})
-            iter = 20
+            scheduler = optim.lr_scheduler.ExponentialLR(optimizer, 0.98)
+            iter = 100
             best_lb, best_ub = lb, ub
             best_loss = np.inf
+            #compute lower bound
             for j in range(iter):
-                # print(lb)
-                best_lb = torch.max(best_lb , lb)
-                best_ub = torch.min(best_ub , ub)
+                #update intermediate bound
 
                 for i in range(len(modules)):
-                    # We only need the bounds before a ReLU/HardTanh layer
                     if isinstance(modules[i], BoundReLU) or isinstance(modules[i], BoundHardTanh):
                         if isinstance(modules[i - 1], BoundLinear):
-                            # add a batch dimension
                             newC = torch.eye(modules[i - 1].out_features).unsqueeze(0).repeat(x_U.shape[0], 1, 1).to(x_U)
-                            # Use CROWN to compute pre-activation bounds
-                            # starting from layer i-1
                             ub, lb = self.boundpropogate_from_layer(x_U=x_U, x_L=x_L, C=newC, upper=True, lower=True,
                                                                     start_node=i - 1, optimize=0, out_features = modules[i - 1].out_features)
-                        # Set pre-activation bounds for layer i (the ReLU layer)
                         modules[i].upper_u = ub
                         modules[i].lower_l = lb
+
+
+                # ub, lb = self.boundpropogate_from_layer(x_U=x_U, x_L=x_L,
+                #                                 C=torch.eye(modules[i].out_features).unsqueeze(0).to(x_U), upper=upper,
+                #                                 lower=lower, start_node=i, optimize=True, out_features = modules[i].out_features)
+
                 ub, lb = self.boundpropogate_from_layer(x_U=x_U, x_L=x_L,
-                                                C=torch.eye(modules[i].out_features).unsqueeze(0).to(x_U), upper=upper,
-                                                lower=lower, start_node=i, optimize=True, out_features = modules[i].out_features)
-                optimizer.zero_grad(set_to_none=True)
-                loss = -lb.sum() 
+                                                C=C_matrix, upper=upper,
+                                                lower=lower, start_node=i, optimize=True, out_features = modules[i].out_features-1)
+                optimizer.zero_grad()
+                loss = -lb.sum()
+                print('ret:',lb) 
                 if(loss < best_loss):
-                    for module in modules:
-                        if isinstance(module, BoundHardTanh) or isinstance(module, BoundReLU):
-                            module.update_l(name)
+                    for i in range(len(modules)):
+                        if isinstance(modules[i], BoundHardTanh) or isinstance(modules[i], BoundReLU):
+                            modules[i].update_l(name)
+                            modules[i].update_u(name)
+                            if isinstance(modules[i - 1], BoundLinear):
+                                newC = torch.eye(modules[i - 1].out_features).unsqueeze(0).repeat(x_U.shape[0], 1, 1).to(x_U)
+                                ubt, lbt = self.boundpropogate_from_layer(x_U=x_U, x_L=x_L, C=newC, upper=True, lower=True,
+                                                                        start_node=i - 1, optimize=0, out_features = modules[i - 1].out_features)
+                            modules[i].ub = ubt
+                            modules[i].lb = lbt
+
+                            
                     best_loss = loss
                 loss.backward(retain_graph=True)
                 optimizer.step()
+                scheduler.step()
                 for k, node in enumerate(modules):
                     if isinstance(node, BoundReLU):
                         node.clip_alpha()
-                
-            best_loss = np.inf
-            for j in range(iter):
-                # print(lb)
                 best_lb = torch.max(best_lb , lb)
                 best_ub = torch.min(best_ub , ub)
-                for i in range(len(modules)):
-                    # We only need the bounds before a ReLU/HardTanh layer
-                    if isinstance(modules[i], BoundReLU) or isinstance(modules[i], BoundHardTanh):
-                        if isinstance(modules[i - 1], BoundLinear):
-                            # add a batch dimension
-                            newC = torch.eye(modules[i - 1].out_features).unsqueeze(0).repeat(x_U.shape[0], 1, 1).to(x_U)
-                            # Use CROWN to compute pre-activation bounds
-                            # starting from layer i-1
-                            ub, lb = self.boundpropogate_from_layer(x_U=x_U, x_L=x_L, C=newC, upper=True, lower=True,
-                                                                    start_node=i - 1, optimize=0, out_features = modules[i - 1].out_features)
-                        # Set pre-activation bounds for layer i (the ReLU layer)
-                        modules[i].upper_u = ub
-                        modules[i].lower_l = lb
-                ub, lb = self.boundpropogate_from_layer(x_U=x_U, x_L=x_L,
-                                                C=torch.eye(modules[i].out_features).unsqueeze(0).to(x_U), upper=upper,
-                                                lower=lower, start_node=i, optimize=True, out_features = modules[i].out_features)
-                optimizer.zero_grad(set_to_none=True)
-                loss = ub.sum() 
-                if(loss < best_loss):
-                    for module in modules:
-                        if isinstance(module, BoundHardTanh) or isinstance(module, BoundReLU):
-                            module.update_u(name)
-                    best_loss = loss
-                loss.backward(retain_graph=True)
-                optimizer.step()
-                for k, node in enumerate(modules):
-                    if isinstance(node, BoundReLU):
-                        node.clip_alpha()
-                
+            best_lbb = best_lb.clone()
+            #compute lower bound
             return best_ub, best_lb
+
+            #no upper bound for robustness verification
+            # ind = 0
+
+            # for k, node in enumerate(modules):
+            #     if isinstance(node, BoundReLU):
+            #         node.initialize_beta(name)
+            #         node.initialize_alpha(name)
+            # for i in range(len(modules)):
+            #     if isinstance(modules[i], BoundReLU) or isinstance(modules[i], BoundHardTanh):
+            #         modules[i].upper_u = C[ind][1]
+            #         modules[i].lower_l = C[ind][0]
+            #         modules[i].S = split[ind]
+            #         ind += 1
+            # # ub, lb = self.boundpropogate_from_layer(x_U=x_U, x_L=x_L,
+            # #                                   C=torch.eye(modules[i].out_features).unsqueeze(0).to(x_U), upper=upper,
+            # #                                   lower=lower, start_node=i, optimize=0)
+
+            # ub, lb = self.boundpropogate_from_layer(x_U=x_U, x_L=x_L,
+            #                                   C=C_matrix, upper=upper,
+            #                                   lower=lower, start_node=i, optimize=0)
+            # opt = False
+            # best_lb, best_ub = lb, ub
+            # for module in modules:
+            #     if isinstance(module, BoundHardTanh) or isinstance(module, BoundReLU):
+            #         lr = 0.1
+            #         if(opt == False):
+            #             optimizer = optim.Adam(list(module.alpha_l.values()), lr=lr)
+            #             optimizer.add_param_group({'params': list(module.alpha_u.values()),'lr': lr})
+            #             opt = True
+            #         else:
+            #             optimizer.add_param_group({'params': list(module.alpha_l.values()),'lr': lr})
+            #             optimizer.add_param_group({'params': list(module.alpha_u.values()),'lr': lr})
+
+            # best_loss = np.inf
+            # scheduler = optim.lr_scheduler.ExponentialLR(optimizer, 0.98)
+            # for j in range(iter):
+            #     for i in range(len(modules)):
+            #         if isinstance(modules[i], BoundReLU) or isinstance(modules[i], BoundHardTanh):
+            #             if isinstance(modules[i - 1], BoundLinear):
+            #                 newC = torch.eye(modules[i - 1].out_features).unsqueeze(0).repeat(x_U.shape[0], 1, 1).to(x_U)
+            #                 ub, lb = self.boundpropogate_from_layer(x_U=x_U, x_L=x_L, C=newC, upper=True, lower=True,
+            #                                                         start_node=i - 1, optimize=0, out_features = modules[i - 1].out_features)
+            #             modules[i].upper_u = ub
+            #             modules[i].lower_l = lb
+            #     # ub, lb = self.boundpropogate_from_layer(x_U=x_U, x_L=x_L,
+            #     #                                 C=torch.eye(modules[i].out_features).unsqueeze(0).to(x_U), upper=upper,
+            #     #                                 lower=lower, start_node=i, optimize=True, out_features = modules[i].out_features)
+
+            #     ub, lb = self.boundpropogate_from_layer(x_U=x_U, x_L=x_L,
+            #                                     C=C_matrix, upper=upper,
+            #                                     lower=lower, start_node=i, optimize=True, out_features = modules[i].out_features)
+
+            #     optimizer.zero_grad()
+            #     loss = ub.sum() 
+            #     if(loss < best_loss):
+            #         for module in modules:
+            #             if isinstance(module, BoundHardTanh) or isinstance(module, BoundReLU):
+            #                 module.update_u(name)
+            #         best_loss = loss
+            #     loss.backward(retain_graph=True)
+            #     optimizer.step()
+            #     scheduler.step()
+            #     for k, node in enumerate(modules):
+            #         if isinstance(node, BoundReLU):
+            #             node.clip_alpha()
+            #     best_lb = torch.max(best_lb , lb)
+            #     best_ub = torch.min(best_ub , ub)
+            # best_ubb = best_ub
+            # return best_ubb, best_lbb
         else:
+            # for k, node in enumerate(modules):
+            #     if isinstance(node, BoundReLU):
+            #         node.clip_alpha()
+            #         node.clip_beta()
+
             print('')
             print('')
             print('C', C)
             print('split:', split)
+            print('name:', name)
             opt = False
-            lr_a = 0.05
-            lr_b = 0.05
+            lr_a = 0.01
             # lr_b = 0.5
+            lr_b = 0.05
+            # for module in modules:
+            #     if isinstance(module, BoundHardTanh) or isinstance(module, BoundReLU):
+            #         if(opt == False):
+            #             alpha_optimizer = optim.Adam(list(module.alpha_l.values()), lr=lr_a)
+            #             alpha_optimizer.add_param_group({'params': list(module.alpha_u.values()),'lr': lr_a})
+            #             alpha_optimizer.add_param_group({'params': list(module.beta_l.values()),'lr': lr_b})
+            #             # beta_optimizer = optim.Adam(list(module.beta_l.values()), lr=lr_b)
+
+            #             alpha_optimizer.add_param_group({'params': list(module.beta_u.values()),'lr': lr_b})
+            #             # beta_optimizer.add_param_group({'params': list(module.beta_u.values()),'lr': lr_b})
+            #             opt = True
+            #         else:
+            #             alpha_optimizer.add_param_group({'params': list(module.alpha_u.values()),'lr': lr_a})
+            #             alpha_optimizer.add_param_group({'params': list(module.alpha_l.values()),'lr': lr_a})
+            #             alpha_optimizer.add_param_group({'params': list(module.beta_u.values()),'lr': lr_b})
+            #             alpha_optimizer.add_param_group({'params': list(module.beta_l.values()),'lr': lr_b})
+            #             # beta_optimizer.add_param_group({'params': list(module.beta_u.values()),'lr': lr_b})
+            #             # beta_optimizer.add_param_group({'params': list(module.beta_l.values()),'lr': lr_b})
+            # scheduler = optim.lr_scheduler.ExponentialLR(alpha_optimizer, 0.98)
+
+            alpha_params = []
+            beta_params = []
+            alpha_schedulers = []
+            beta_schedulers = []
+
             for module in modules:
                 if isinstance(module, BoundHardTanh) or isinstance(module, BoundReLU):
-                    if(opt == False):
-                        alpha_optimizer = optim.Adam(list(module.alpha_l.values()), lr=lr_a)
-                        alpha_optimizer.add_param_group({'params': list(module.alpha_u.values()),'lr': lr_a})
-                        # alpha_optimizer.add_param_group({'params': list(module.beta_l.values()),'lr': lr_b})
-                        beta_optimizer = optim.Adam(list(module.beta_l.values()), lr=lr_b)
+                    alpha_params.extend(list(module.alpha_l.values()))
+                    alpha_params.extend(list(module.alpha_u.values()))
+                    beta_params.extend(list(module.beta_l.values()))
+                    beta_params.extend(list(module.beta_u.values()))
 
-                        # alpha_optimizer.add_param_group({'params': list(module.beta_u.values()),'lr': lr_b})
-                        beta_optimizer.add_param_group({'params': list(module.beta_u.values()),'lr': lr_b})
-                        opt = True
-                    else:
-                        alpha_optimizer.add_param_group({'params': list(module.alpha_u.values()),'lr': lr_a})
-                        alpha_optimizer.add_param_group({'params': list(module.alpha_l.values()),'lr': lr_a})
-                        # alpha_optimizer.add_param_group({'params': list(module.beta_u.values()),'lr': lr_b})
-                        # alpha_optimizer.add_param_group({'params': list(module.beta_l.values()),'lr': lr_b})
-                        beta_optimizer.add_param_group({'params': list(module.beta_u.values()),'lr': lr_b})
-                        beta_optimizer.add_param_group({'params': list(module.beta_l.values()),'lr': lr_b})
+            alpha_optimizer = optim.Adam([
+                {'params': alpha_params, 'lr': lr_a},
+                {'params': beta_params, 'lr': lr_b}
+            ])
 
+            alpha_scheduler = optim.lr_scheduler.ExponentialLR(alpha_optimizer, 0.98)
             # print("Parameters in alpha_optimizer:")
             # for param_group in alpha_optimizer.param_groups:
             #     for param in param_group['params']:
@@ -327,42 +528,35 @@ class BoundedSequential(nn.Sequential):
             # for param_group in beta_optimizer.param_groups:
             #     for param in param_group['params']:
             #         print(param.size(), param.requires_grad)
-            
-            iter = 50
+            iter = 15
             best_lb, best_ub = lb, ub
             best_loss = np.inf
+            print('labels:', self.labels)
             for j in range(iter):
-                # if((ub-lb).sum() < 0):
-                best_lb = torch.max(best_lb , lb)
-                best_ub = torch.min(best_ub , ub)
-                if(torch.any(best_lb > best_ub)):
-                    return best_ub, best_lb
-            
+                # for i in range(len(modules)):
+                #     if isinstance(modules[i], BoundReLU) or isinstance(modules[i], BoundHardTanh):
+                #         if isinstance(modules[i - 1], BoundLinear):
+                #             newC = torch.eye(modules[i - 1].out_features).unsqueeze(0).repeat(x_U.shape[0], 1, 1).to(x_U)
+                #             ub, lb = self.boundpropogate_from_layer(x_U=x_U, x_L=x_L, C=newC, upper=True, lower=True,
+                #                                                     start_node=i - 1, optimize=0, out_features = modules[i - 1].out_features)
+                #         modules[i].upper_u = ub
+                #         modules[i].lower_l = lb
+                
                 ub, lb = self.boundpropogate_from_layer(x_U=x_U, x_L=x_L,
-                                                C=torch.eye(modules[i].out_features).unsqueeze(0).to(x_U), upper=upper,
+                                                C=C_matrix, upper=upper,
                                                 lower=lower, start_node=i, optimize=True, out_features = modules[i].out_features)
 
                 for module in modules:
                     if isinstance(module, BoundHardTanh) or isinstance(module, BoundReLU):
-                        print('alpha')
+                        print('alpha_l')
                         print(module.alpha_l.values())
-                        print('beta')
+                        print('beta_l')
                         print(module.beta_l.values())
-                        print('lb')
-                        print(lb)
-
-                # beta_optimizer.zero_grad()
-                # beta_loss = -lb.sum() 
-                # # beta_loss = ub.sum() 
-                # beta_loss.backward(retain_graph=True)
-                # beta_optimizer.step()
-
-                # for k, node in enumerate(modules):
-                #     if isinstance(node, BoundReLU):
-                #         node.clip_beta()
-
+                #         print('lb')
+                #         print(lb)
                 alpha_optimizer.zero_grad()
-                alpha_loss = -lb.sum() 
+                alpha_loss = -lb.sum()                 
+                print("loss:",alpha_loss)
                 if(alpha_loss < best_loss):
                     for module in modules:
                         if isinstance(module, BoundHardTanh) or isinstance(module, BoundReLU):
@@ -371,34 +565,34 @@ class BoundedSequential(nn.Sequential):
                     best_loss = alpha_loss
                 alpha_loss.backward()
                 alpha_optimizer.step()
+                alpha_scheduler.step()
 
-                ub, lb = self.boundpropogate_from_layer(x_U=x_U, x_L=x_L,
-                                                C=torch.eye(modules[i].out_features).unsqueeze(0).to(x_U), upper=upper,
-                                                lower=lower, start_node=i, optimize=True, out_features = modules[i].out_features)
+                # ub, lb = self.boundpropogate_from_layer(x_U=x_U, x_L=x_L,
+                #                                 C=torch.eye(modules[i].out_features).unsqueeze(0).to(x_U), upper=upper,
+                #                                 lower=lower, start_node=i, optimize=True, out_features = modules[i].out_features)
 
-                beta_optimizer.zero_grad()
-                beta_loss = -lb.sum() 
-                beta_loss.backward()
-                beta_optimizer.step()
-
-
-
-                # if(alpha_loss > temp_loss+10 or torch.any(lb > ub)):
-                # if(torch.any(lb > ub)):
-                #     return lb-10, lb
-                # if(torch.abs(temp_loss-alpha_loss) < 0.0001):
-                #     break
+                # beta_optimizer.zero_grad()
+                # beta_loss = -lb.sum() 
+                # if(beta_loss < best_loss):
+                #     for module in modules:
+                #         if isinstance(module, BoundHardTanh) or isinstance(module, BoundReLU):
+                #             module.update_l(name)
+                #             module.update_u(name)
+                #     best_loss = beta_loss
+                # beta_loss.backward()
+                # beta_optimizer.step()
                 
                 # temp_loss = beta_loss
-                # print("alpha loss:",alpha_loss)
+                
                 for k, node in enumerate(modules):
                     if isinstance(node, BoundReLU):
                         node.clip_alpha()
-                for k, node in enumerate(modules):
-                    if isinstance(node, BoundReLU):
                         node.clip_beta()
-                
-                # print(beta_loss)
+                        # node.inact_alpha(i)
+                best_lb = torch.max(best_lb , lb)
+                best_ub = torch.min(best_ub , ub)
+                if(torch.any(best_lb > best_ub)):
+                    return best_ub, best_lb
             for module in modules:
                 if isinstance(module, BoundHardTanh) or isinstance(module, BoundReLU):
                     print('Stored List')
@@ -415,9 +609,6 @@ class BoundedSequential(nn.Sequential):
             lb, ub = bound[1], bound[0]
             if(torch.any(lb > ub)):
                 continue
-            # elif(torch.any(lb > std)):
-            #     print('wrong!!!wrong!!!wrong!!!wrong!!!wrong!!!')
-            #     print(lb)
             P.append((lb,ub,C,name))
             split_list.append(split)
         return P, split_list
@@ -460,9 +651,15 @@ class BoundedSequential(nn.Sequential):
         # ub, lb = self.boundpropogate_from_layer(x_U=x_U, x_L=x_L,
         #                                     C=torch.eye(modules[i].out_features).unsqueeze(0).to(x_U), upper=True,
         #                                     lower=True, start_node=i, optimize=0, out_features = modules[i].out_features)
+
         ub, lb = self.optimized_beta_CROWN(C, split_bool_list_global[0], x_U=x_U, x_L=x_L, upper=True, lower=True, optimize=1, name=0)
-        # return lb, ub
-        # print(C)
+
+        C = []
+        for i in range(len(modules)):
+            # We only need the bounds before a ReLU/HardTanh layer
+            if isinstance(modules[i], BoundReLU) or isinstance(modules[i], BoundHardTanh):
+                C.append((modules[i].lb, modules[i].ub))
+        print('after alpha:', lb, ub)
         P = [(lb, ub, C, 0)]
         interations = 1
         inter = 0
@@ -477,7 +674,7 @@ class BoundedSequential(nn.Sequential):
             assert len(P) == len(split_bool_list_global)
 
             #SINGLE C: (lb,ub)
-            C_split, split_bool_list_loop, name_list = self.split(C_list, split_bool_list_loop)
+            C_split, split_bool_list_loop, name_list = self.general_split(C_list, split_bool_list_loop, split_depth = 1)
             # print(C_split)
             # print(split_bool_list_loop)
             # print(len(C_list),len(C_split))
@@ -534,7 +731,7 @@ class BoundedSequential(nn.Sequential):
         #         o = omega(modules, k-1, i, device)
 
         for i, module in enumerate(reversed(modules)):
-            upper_A, upper_b, lower_A, lower_b = module.boundpropogate(upper_A, lower_A, start_node, optimize=optimize, out_features = modules[start_node].out_features)
+            upper_A, upper_b, lower_A, lower_b = module.boundpropogate(upper_A, lower_A, start_node, optimize=optimize, out_features = out_features)
             upper_sum_b = upper_b + upper_sum_b
             lower_sum_b = lower_b + lower_sum_b
             # print(module,lower_A,lower_b)
@@ -572,39 +769,49 @@ def main():
                         type=str, help='Activation Function')
     parser.add_argument('data_file', type=str, help='input data, a tensor saved as a .pth file.')
     parser.add_argument('optimize', type=int, help='whether to use alpha crown, 1 for alpha crown and 0 for crown')
+    parser.add_argument('data', type=str, help='toy tor box, keyulu for complex')
     # Parse the command line arguments
     args = parser.parse_args()
 
-    x_test, label = torch.load(args.data_file)
+    x_test, labels = torch.load(args.data_file)
     if args.activation == 'relu':
         print('use ReLU model')
-        # model = SimpleNNRelu().to(device)
-        # model.load_state_dict(torch.load('models/relu_model.pth'))
-        model = two_relu_toy_model(in_dim=2, out_dim=2).to(device)
+        if(args.data == 'keyulu'):
+            model = SimpleNNRelu().to(device)
+            model.load_state_dict(torch.load('models/relu_model.pth'))
+        else:
+            model = two_relu_toy_model(in_dim=2, out_dim=2).to(device)
     else:
         print('use HardTanh model')
         model = SimpleNNHardTanh().to(device)
         model.load_state_dict(torch.load('models/hardtanh_model.pth'))
 
-    # batch_size = x_test.size(0)
-    # x_test = x_test.reshape(batch_size, -1).to(device)
-    # output = model(x_test)
-    # y_size = output.size(1)
+    if(args.data == 'keyulu'):
+        batch_size = x_test.size(0)
+        x_test = x_test.reshape(batch_size, -1).to(device)
+        labels = torch.tensor([labels]).long().to(device)
+        output = model(x_test)
+        y_size = output.size(1) - 1
+    else:
+        x_test = torch.tensor([[0., 0.]]).float().to(device)
+        labels = torch.tensor([0]).long().to(device)
+        batch_size = x_test.size(0)
+        output = model(x_test)
+        y_size = output.size(1) - 1
 
-    x_test = torch.tensor([[0., 0.]]).float().to(device)
-    batch_size = x_test.size(0)
-    output = model(x_test)
-    y_size = output.size(1)
     print("Network prediction: {}".format(output))
-    # eps = 0.01
-    eps = 1
+    if(args.data == 'keyulu'):
+        eps = 0.03
+    else:
+        eps = 1
     x_u = x_test + eps
     x_l = x_test - eps
 
     print(f"Verifiying Pertubation - {eps}")
     start_time = time.time()
     boundedmodel = BoundedSequential.convert(model)
-    lb, ub = boundedmodel.BaB(x_U=x_u, x_L=x_l, delta=0, n=100, batch_size=100, optimize=args.optimize)
+    boundedmodel.labels = labels
+    lb, ub = boundedmodel.BaB(x_U=x_u, x_L=x_l, delta=-1, n=100, batch_size=100, optimize=args.optimize)
     # print(C)
     # ub, lb = boundedmodel.compute_bounds(x_U=x_u, x_L=x_l, upper=True, lower=True, optimize=args.optimize)
     for i in range(batch_size):
@@ -613,6 +820,6 @@ def main():
                 j=j, i=i, l=lb[i][j].item(), u=ub[i][j].item()))
 
 from contextlib import redirect_stdout
-with open('alpha_beta_lb_oa.txt', 'w') as f:
+with open('try.txt', 'w') as f:
     with redirect_stdout(f):
         main()
