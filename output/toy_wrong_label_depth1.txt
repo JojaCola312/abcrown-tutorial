@@ -1,0 +1,176 @@
+use ReLU model
+Network prediction: tensor([[2., 0.]], device='cuda:0', grad_fn=<AddmmBackward0>)
+Verifiying Pertubation - 1
+using beta-CROWN
+using CROWN
+result from crown is: tensor([[-5.]], device='cuda:0', grad_fn=<AddBackward0>)
+using alpha-CROWN
+ret: tensor([[-5.]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.7000]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.4060]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2940]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.3594]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.4032]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.4310]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.4463]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.4517]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.4490]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.4398]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.4251]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.4059]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.3829]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.3568]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.3280]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2971]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2643]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.3102]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.3491]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.3407]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2965]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2584]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2758]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2875]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2942]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2965]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2949]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2900]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2822]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2718]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2592]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2660]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2747]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2552]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2624]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2721]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2780]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2805]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2800]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2769]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2715]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2641]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2550]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2670]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2727]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2568]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2590]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2668]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2715]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2736]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2734]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2711]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2670]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2614]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2544]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2612]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2654]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2528]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2580]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2641]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2679]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2696]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2694]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2676]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2645]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2601]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2547]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2549]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2581]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2506]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2522]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2521]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2508]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2553]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2503]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2551]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2584]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2602]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2606]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2598]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2579]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2551]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2515]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2585]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2602]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2523]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2545]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2582]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2605]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2615]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2616]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2607]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2590]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2566]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2536]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2501]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2616]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2645]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2600]], device='cuda:0', grad_fn=<AddBackward0>)
+result from alpha crown is: tensor([[-4.2501]], device='cuda:0', grad_fn=<MaximumBackward0>)
+unstable: 2
+
+instance 0 have not been verified with lb tensor([-4.2501], device='cuda:0', grad_fn=<SelectBackward0>) and C tensor([[[-1.,  1.]]], device='cuda:0')
+C [(tensor([[ 0., -3.],
+        [-3., -3.]], device='cuda:0'), tensor([[3., 3.],
+        [0., 3.]], device='cuda:0'))]
+split: [tensor([[-1.,  0.],
+        [ 1.,  0.]], device='cuda:0')]
+ret: tensor([[-4.2497, -2.7503]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.2197, -2.7203]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.1903, -2.6909]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.1615, -2.6621]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.1333, -2.6338]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.1056, -2.6061]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.0785, -2.5790]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.0519, -2.5525]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.0259, -2.5264]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-4.0004, -2.5009]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-3.9753, -2.4759]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-3.9508, -2.4514]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-3.9268, -2.4273]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-3.9033, -2.4038]], device='cuda:0', grad_fn=<AddBackward0>)
+ret: tensor([[-3.8802, -2.3807]], device='cuda:0', grad_fn=<AddBackward0>)
+best_lb: tensor([[-3.8802, -2.3807]], device='cuda:0', grad_fn=<MaximumBackward0>)
+C [(tensor([[ 0., -3.],
+        [ 0., -3.],
+        [ 0., -3.],
+        [-3., -3.]], device='cuda:0'), tensor([[3., 3.],
+        [0., 3.],
+        [0., 3.],
+        [0., 3.]], device='cuda:0'))]
+split: [tensor([[-1.,  0.],
+        [-1.,  0.],
+        [ 1.,  0.],
+        [ 1.,  0.]], device='cuda:0')]
+ret: tensor([[-3.8576, -4.6419, -3.8576, -2.3581]], device='cuda:0',
+       grad_fn=<AddBackward0>)
+ret: tensor([[-3.8276, -4.6119, -3.6776, -2.3281]], device='cuda:0',
+       grad_fn=<AddBackward0>)
+ret: tensor([[-3.7982, -4.5825, -3.5012, -2.2987]], device='cuda:0',
+       grad_fn=<AddBackward0>)
+ret: tensor([[-3.7694, -4.5537, -3.3283, -2.2699]], device='cuda:0',
+       grad_fn=<AddBackward0>)
+ret: tensor([[-3.7411, -4.5254, -3.2255, -2.2417]], device='cuda:0',
+       grad_fn=<AddBackward0>)
+ret: tensor([[-3.7135, -4.4978, -3.1898, -2.2140]], device='cuda:0',
+       grad_fn=<AddBackward0>)
+ret: tensor([[-3.6864, -4.4706, -3.1554, -2.1869]], device='cuda:0',
+       grad_fn=<AddBackward0>)
+ret: tensor([[-3.6598, -4.4441, -3.1221, -2.1603]], device='cuda:0',
+       grad_fn=<AddBackward0>)
+ret: tensor([[-3.6337, -4.4180, -3.0895, -2.1343]], device='cuda:0',
+       grad_fn=<AddBackward0>)
+ret: tensor([[-3.6082, -4.3925, -3.0577, -2.1087]], device='cuda:0',
+       grad_fn=<AddBackward0>)
+ret: tensor([[-3.5832, -4.3675, -3.0264, -2.0837]], device='cuda:0',
+       grad_fn=<AddBackward0>)
+ret: tensor([[-3.5587, -4.3430, -2.9956, -2.0592]], device='cuda:0',
+       grad_fn=<AddBackward0>)
+ret: tensor([[-3.5347, -4.3190, -2.9653, -2.0352]], device='cuda:0',
+       grad_fn=<AddBackward0>)
+ret: tensor([[-3.5111, -4.2954, -2.9354, -2.0117]], device='cuda:0',
+       grad_fn=<AddBackward0>)
+ret: tensor([[-3.5040, -4.2723, -2.9059, -2.0000]], device='cuda:0',
+       grad_fn=<AddBackward0>)
+best_lb: tensor([[-3.5040, -4.2723, -2.9059, -2.0000]], device='cuda:0',
+       grad_fn=<MaximumBackward0>)
+unsafe!!!!

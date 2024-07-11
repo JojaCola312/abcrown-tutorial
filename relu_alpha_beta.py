@@ -77,10 +77,9 @@ class BoundReLU(nn.ReLU):
 
         # lb_r and ub_r are the bounds of input (pre-activation)
         # Here the clamping oepration ensures the results are correct for stable neurons.
+
         lb_r = self.lower_l.clamp(max=0)
         ub_r = self.upper_u.clamp(min=0)
-        if(self.S == None):
-            self.S = torch.zeros(self.lower_l.shape[1],self.lower_l.shape[1])
 
         # avoid division by 0 when both lb_r and ub_r are 0
         ub_r = torch.max(ub_r, lb_r + 1e-8)
@@ -88,7 +87,7 @@ class BoundReLU(nn.ReLU):
         # CROWN upper and lower linear bounds
         upper_d = ub_r / (ub_r - lb_r)  # slope
         upper_b = - lb_r * upper_d  # intercept
-        upper_d = upper_d.unsqueeze(1)
+        upper_d = upper_d.unsqueeze(0)
         
         # Lower bound: 0 if |lb| < |ub|, 1 otherwise.
         # Equivalently we check whether the slope of the upper bound is > 0.5.
@@ -117,6 +116,11 @@ class BoundReLU(nn.ReLU):
             self.beta_u[start_node] = nn.Parameter(self.beta_u[start_node])
             self.beta_u[start_node].requires_grad_()
 
+        if(optimize == 2):
+            S = self.S
+        else:
+            S = torch.zeros(self.beta_l[start_node].shape)
+
         lb_lower_d = self.alpha_l[start_node].clone().detach()
         ub_lower_d = self.alpha_u[start_node].clone().detach()
 
@@ -135,7 +139,7 @@ class BoundReLU(nn.ReLU):
         uA = lA = None
         ubias = lbias = 0
         device = torch.device('cuda')
-        self.S = self.S.to(device)
+        S = S.to(device)
         # numpy_list = [tensor.cpu().numpy() for tensor in self.S]
         # nonzero_counts = [np.count_nonzero(arr) for arr in numpy_list]
         
@@ -145,20 +149,22 @@ class BoundReLU(nn.ReLU):
             neg_uA = last_uA.clamp(max=0)
             # Choose upper or lower bounds based on the sign of last_A
             # New linear bound coefficent.
-            uA = upper_d * pos_uA + ub_lower_d * neg_uA + ub_beta @ self.S
+            uA = upper_d * pos_uA + ub_lower_d * neg_uA + ub_beta * S
             # New bias term. Adjust shapes to use matmul (better way is to use einsum).
             mult_uA = pos_uA.view(last_uA.size(0), last_uA.size(1), -1)
-            ubias = mult_uA.matmul(upper_b.view(upper_b.size(0), -1, 1)).squeeze(-1)
+            # ubias = mult_uA.matmul(upper_b.view(upper_b.size(0), -1, 1)).squeeze(-1)
+            ubias = (mult_uA * upper_b).sum(dim=-1)
         if last_lA is not None:
             neg_lA = last_lA.clamp(max=0)
             pos_lA = last_lA.clamp(min=0)
             # Choose upper or lower bounds based on the sign of last_A
             # New linear bound coefficent.
             # print('inside',self.S,lb_lower_d)
-            lA = upper_d * neg_lA + lb_lower_d * pos_lA + lb_beta @ self.S
+            lA = upper_d * neg_lA + lb_lower_d * pos_lA + lb_beta * S
             # New bias term.
             mult_lA = neg_lA.view(last_lA.size(0), last_lA.size(1), -1)
-            lbias = mult_lA.matmul(upper_b.view(upper_b.size(0), -1, 1)).squeeze(-1)
+            # lbias = mult_lA.matmul(upper_b.view(upper_b.size(0), -1, 1)).squeeze(-1)
+            lbias = (mult_lA * upper_b).sum(dim=-1)
         
         self.last_lA = last_lA
         self.last_uA = last_uA
@@ -166,7 +172,6 @@ class BoundReLU(nn.ReLU):
         self.uA = uA
         self.lbias = lbias
         self.ubias = ubias
-        self.upper_b = upper_b
 
         return uA, ubias, lA, lbias
 
@@ -187,7 +192,15 @@ class BoundReLU(nn.ReLU):
             v.data = torch.clamp(v.data, min=0)
         for v in self.beta_u.values():
             v.data = torch.clamp(v.data, min=0)
-
+    def initialize_robustness(self, name):
+        for v,u in zip(self.alpha_l.values(),self.alpha_l_list[0].values()):
+            v.data.copy_(u)
+        for v,u in zip(self.alpha_u.values(),self.alpha_u_list[0].values()):
+            v.data.copy_(u)
+        for v,u in zip(self.beta_l.values(),self.beta_l_list[0].values()):
+            v.data.copy_(u)
+        for v,u in zip(self.beta_u.values(),self.beta_u_list[0].values()):
+            v.data.copy_(u)
     def initialize_alpha(self,name):
         if(name == 0):
             for v in self.alpha_l.values():
@@ -220,7 +233,6 @@ class BoundReLU(nn.ReLU):
         self.last_lA_list[name] = self.last_lA.clone()
         self.lA_list[name] = self.lA.clone()
         self.lbias_list[name] = self.lbias.clone()
-        self.upper_b_list[name] = self.upper_b.clone()
     def update_u(self,name):
         self.beta_u_list[name] = copy.deepcopy(self.beta_u)
         self.alpha_u_list[name] = copy.deepcopy(self.alpha_u)
@@ -228,7 +240,6 @@ class BoundReLU(nn.ReLU):
         self.last_uA_list[name] = self.last_uA.clone()
         self.uA_list[name] = self.uA.clone()
         self.ubias_list[name] = self.ubias.clone()
-        self.upper_b_list[name] = self.upper_b.clone()
 
 
     def modify_lb(self, lbs):
