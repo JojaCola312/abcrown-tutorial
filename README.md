@@ -13,7 +13,7 @@ pip install numpy
 - `linear.py`: Definition of `BoundLinear` class. 
 - `relu_alpha_beta.py`: Definition of `BoundReLU` class. Most functions about ReLU are defined inside the  class.
 - `model.py`: PyTorch model definition.  
-- `models/relu_model.pth`: Pretrained model for debugging. It is only for the relavent complex model, and the simple toy model is defined inside `model.py`. 
+- `models/relu_model.pth`: Pretrained model for debugging. It is only for the relevant complex 2 ReLU model, and the simple toy 1 ReLU model is defined inside `model.py`. 
 
 # Run
 ```
