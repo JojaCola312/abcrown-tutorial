@@ -201,6 +201,7 @@ class BoundedSequential(nn.Sequential):
                 best_ub = torch.min(best_ub , ub)
             return best_ub, best_lb
         else:
+            
             # print('split:', split)
             # print('name:', name)
             opt = False
@@ -481,7 +482,6 @@ class BoundedSequential(nn.Sequential):
             return S
         split_bool = get_s(domains,device)
 
-        print('using beta-CROWN')
 
         ub, lb = self.optimized_beta_CROWN(domains, C_matrix, split_bool, x_U=x_U, x_L=x_L, upper=True, lower=True, optimize=0, name=0)
         print('result from crown is:',lb)
@@ -503,7 +503,8 @@ class BoundedSequential(nn.Sequential):
                 domains.append((modules[i].lb, modules[i].ub))
                 mask = (modules[i].lb < 0) & (modules[i].ub > 0)
                 unstable_size += mask.sum().item()
-        print('unstable:',unstable_size)
+        print('using alpha-beta-crown')
+        print('size of unstable nuerons:',unstable_size)
         num_out_features = C_matrix.shape[1]
         final_start_node = len(modules) - 1
 
