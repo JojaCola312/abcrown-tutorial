@@ -1,5 +1,5 @@
 # Alpha-Beta-CROWN Robustness Verification Tutorial 
-This repository contains a simple implementation of roboustness verification using CROWN, alpha-CROWN and beta-CROWN algorithms for fully connected sequential ReLU networks. 
+This repository contains a simple implementation of robustness verification using CROWN, alpha-CROWN and beta-CROWN algorithms for fully connected sequential ReLU networks. 
 
 ## Prerequisites 
 To run the tutorial, you need to install the `torch` and `numpy` library. You can install it using pip: 
@@ -9,11 +9,11 @@ pip install numpy
 ```
 
 ## Contents
-- `alpha_beta_CROWN.py`: Implementation of CROWN, alpha-CROWN and beta-CROWN. Function about beta-CROWN including `Bab`, `general_split_robustness`, `domain_filter_robusness`, `optimized_beta_CROWN` and some related sub-function are defined inside `BoundedSequential` class.
+- `alpha_beta_CROWN.py`: Implementation of CROWN, alpha-CROWN and beta-CROWN. Functions related to beta-CROWN, including `Bab`, `general_split_robustness`, `domain_filter_robustness`, `optimized_beta_CROWN`, and some related sub-functions, are defined inside the `BoundedSequential` class.
 - `linear.py`: Definition of `BoundLinear` class. 
 - `relu_alpha_beta.py`: Definition of `BoundReLU` class. Most functions about ReLU are defined inside the  class.
 - `model.py`: PyTorch model definition.  
-- `models/relu_model.pth`: Pretrained model for debugging. It is only for the complex 2 ReLU model, and the parameter of simple 1 ReLU toy model is defined inside `model.py`. 
+- `models/relu_model.pth`: Pretrained model for debugging. It is only for the complex 2 ReLU model, and the parameters of simple 1 ReLU toy model is defined inside `model.py`. 
 
 ## Run
 ```
