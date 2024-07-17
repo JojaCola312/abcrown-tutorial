@@ -117,7 +117,7 @@ class BoundedSequential(nn.Sequential):
         return new_C
 
 
-    def optimized_beta_CROWN(self, C, C_matrix, split, x_U=None, x_L=None, upper=True, lower=True, optimize=1, name=0):
+    def optimized_beta_CROWN(self, domains, C_matrix, split, x_U=None, x_L=None, upper=True, lower=True, optimize=1, name=0):
         modules = list(self._modules.values())
         # CROWN propagation for all layers
         ind = 0
@@ -125,8 +125,8 @@ class BoundedSequential(nn.Sequential):
         for i in range(len(modules)):
             # We only need the bounds before a ReLU/HardTanh layer
             if isinstance(modules[i], BoundReLU):
-                modules[i].upper_u = C[ind][1]
-                modules[i].lower_l = C[ind][0]
+                modules[i].upper_u = domains[ind][1]
+                modules[i].lower_l = domains[ind][0]
                 modules[i].S = split[ind]
                 modules[i].final_start_node = len(modules) - 1
                 ind += 1
@@ -155,7 +155,6 @@ class BoundedSequential(nn.Sequential):
             scheduler = optim.lr_scheduler.ExponentialLR(optimizer, 0.98)
             iter = 55
             best_lb, best_ub = lb, ub
-            best_loss = np.inf
             #compute lower bound
             for j in range(iter):
                 #update intermediate bound
@@ -202,7 +201,6 @@ class BoundedSequential(nn.Sequential):
                 best_ub = torch.min(best_ub , ub)
             return best_ub, best_lb
         else:
-            # print('C', C)
             # print('split:', split)
             # print('name:', name)
             opt = False
@@ -229,7 +227,6 @@ class BoundedSequential(nn.Sequential):
             scheduler = optim.lr_scheduler.ExponentialLR(optimizer, 0.98)
             iter = 15
             best_lb, best_ub = lb, ub
-            best_loss = np.inf
 
             for j in range(iter):
                 
@@ -264,37 +261,16 @@ class BoundedSequential(nn.Sequential):
 
 
     #sub-function for robustness
-    def initialize_para(self, modules, C_domain, C_new, S, name, start_node):
-        #initialize upper_d and upper_b in each relu module using the new domain, only called at the first time
-        assert len(C_domain)==len(S)
-        ind = 0
+    def initialize_para(self, modules, domains, C_new, S, name, start_node):
+        #only called at the first time
+
         for i in range(len(modules)):
-            # We only need the bounds before a ReLU/HardTanh layer
             if isinstance(modules[i], BoundReLU):
-                upper_u = C_domain[ind][1]
-                lower_l = C_domain[ind][0]
-                
-
-                lb_r = lower_l.clamp(max=0)
-                ub_r = upper_u.clamp(min=0)
-
-                # avoid division by 0 when both lb_r and ub_r are 0
-                ub_r = torch.max(ub_r, lb_r + 1e-8)
-
-                # CROWN upper and lower linear bounds
-                upper_d = ub_r / (ub_r - lb_r)  # slope
-                upper_b = - lb_r * upper_d  # intercept
-                upper_d = upper_d.unsqueeze(1)
-                modules[i].upper_d = upper_d
-                modules[i].upper_b = upper_b
-                modules[i].S = S[ind]
                 modules[i].alpha_l[start_node] = modules[i].alpha_l_list[0][start_node][:,name-1,:].unsqueeze(1)
                 modules[i].alpha_u[start_node] = modules[i].alpha_u_list[0][start_node][:,name-1,:].unsqueeze(1)
                 modules[i].beta_l[start_node] = modules[i].beta_l_list[0][start_node][:,name-1,:].unsqueeze(1)
                 modules[i].beta_u[start_node] = modules[i].beta_u_list[0][start_node][:,name-1,:].unsqueeze(1)
                 modules[i].last_lA_list[name] = modules[i].last_lA_list[0][:,name-1,:].unsqueeze(1)
-
-                ind += 1
     
 
     def mark_topk_indices(self, scores, k):
@@ -323,12 +299,12 @@ class BoundedSequential(nn.Sequential):
         return topk_indices
         # return final_masks
 
-    def generate_combinations_with_masks(self, C, mask_indices, split_bool, C_matrix, modules, split_depth):
-        batch_size = len(C)
+    def generate_combinations_with_masks(self, domains, mask_indices, split_bool, C_matrix, modules, split_depth):
+        batch_size = len(domains)
         num_combinations = 2 ** split_depth
-        new_C = []
+        new_domains = []
         new_split_bool = []
-        combinations = torch.tensor(list(itertools.product([0, 1], repeat=split_depth)), device=C[0][0].device)
+        combinations = torch.tensor(list(itertools.product([0, 1], repeat=split_depth)), device=domains[0][0].device)
         C_matrix_new = C_matrix.repeat(1, num_combinations, 1)
         final_start_node = len(modules) - 1
         ind = 0
@@ -350,8 +326,8 @@ class BoundedSequential(nn.Sequential):
                 ind += 1
 
         # Concatenate all lb, ub, masks, and split_bool into one large tensor
-        all_lb = torch.cat([c[0] for c in C], dim=1)
-        all_ub = torch.cat([c[1] for c in C], dim=1)
+        all_lb = torch.cat([c[0] for c in domains], dim=1)
+        all_ub = torch.cat([c[1] for c in domains], dim=1)
         # all_masks = torch.cat([m for m in masks], dim=1)
         all_split = torch.cat([s for s in split_bool], dim=1)
         
@@ -381,12 +357,6 @@ class BoundedSequential(nn.Sequential):
                         repeated_ub[i*batch_size+j, idx] = 0
                         repeated_split[i*batch_size+j, idx] = 1
                     
-                    # if combo == 0:
-                    #     repeated_lb[i*batch_size:(i+1)*batch_size:, idx] = 0
-                    #     repeated_split[i*batch_size:(i+1)*batch_size:, idx] = -1
-                    # else:
-                    #     repeated_ub[i*batch_size:(i+1)*batch_size:, idx] = 0
-                    #     repeated_split[i*batch_size:(i+1)*batch_size:, idx] = 1
                 j += 1
         
         #reshape to the original
@@ -394,7 +364,7 @@ class BoundedSequential(nn.Sequential):
         split_split = torch.split(repeated_split, split_sizes, dim=1)
         new_split_bool = [ss.view(-1,split_size) for ss, split_size in zip(split_split,split_sizes)]
 
-        new_C = []
+        new_domains = []
 
         lb_split = torch.split(repeated_lb, split_sizes, dim=1)
         lb_final = [ss.view(-1,split_size) for ss, split_size in zip(lb_split,split_sizes)]
@@ -403,12 +373,12 @@ class BoundedSequential(nn.Sequential):
         ub_final = [ss.view(-1,split_size) for ss, split_size in zip(ub_split,split_sizes)]
 
         for lb, ub in zip(lb_final, ub_final):
-            new_C.append((lb,ub))
+            new_domains.append((lb,ub))
 
-        return new_C, new_split_bool, C_matrix_new
+        return new_domains, new_split_bool, C_matrix_new
         
 
-    def general_split_robustness(self, C, split_bool, C_matrix, modules, name, split_depth = 1):
+    def general_split_robustness(self, domains, split_bool, C_matrix, modules, name, split_depth = 1):
         relu_list = []
         linear_list = []
         for i, module in enumerate(modules):
@@ -421,8 +391,8 @@ class BoundedSequential(nn.Sequential):
         scores = []
         i = 0
         #calculate the score of all possible split for each C, here just ub-lb
-        for single_C, module, linear in zip(C, relu_list, linear_list):
-            lb, ub = single_C[0].clone().detach(), single_C[1].clone().detach()
+        for single_domains, module, linear in zip(domains, relu_list, linear_list):
+            lb, ub = single_domains[0].clone().detach(), single_domains[1].clone().detach()
             
             mask = (lb < 0) & (ub > 0)
             score = self.babsr_score(module, linear, name, lb, ub)
@@ -432,23 +402,23 @@ class BoundedSequential(nn.Sequential):
             scores.append(score)
             i += 1
         masks = self.mark_topk_indices(scores, split_depth)
-        new_C, new_split_bool, C_matrix_new = self.generate_combinations_with_masks(C, masks, split_bool, C_matrix, modules, split_depth)
+        new_domains, new_split_bool, C_matrix_new = self.generate_combinations_with_masks(domains, masks, split_bool, C_matrix, modules, split_depth)
 
-        return new_C, new_split_bool, C_matrix_new
+        return new_domains, new_split_bool, C_matrix_new
 
-    def domain_filter_robusness(self, lb, C, split_bool_sub, C_new, modules, name):
+    def domain_filter_robusness(self, lb, domains, split_bool_sub, C_new, modules, name):
         mask = lb < 0
         #all lbs are smaller than 0, no domain change
         if(torch.all(mask)):
-            return C, split_bool_sub, C_new, 'remain', lb[mask]
+            return domains, split_bool_sub, C_new, 'remain', lb[mask]
         #all lbs are larger than 0, then verified
         if(torch.all(~mask)):
-            return C, split_bool_sub, C_new, 'verified', lb[mask]
+            return domains, split_bool_sub, C_new, 'verified', lb[mask]
 
-        C_filtered = []
+        domains_filtered = []
         split_filtered = []
-        for C_batch, split_batch in zip(C, split_bool_sub):
-            C_filtered.append((C_batch[0][mask.squeeze(0)],C_batch[1][mask.squeeze(0)]))
+        for domains_batch, split_batch in zip(domains, split_bool_sub):
+            domains_filtered.append((domains_batch[0][mask.squeeze(0)],domains_batch[1][mask.squeeze(0)]))
             split_filtered.append(split_batch[mask.squeeze(0), :])
 
         C_new = C_new[:, mask.squeeze(0), :]
@@ -472,7 +442,7 @@ class BoundedSequential(nn.Sequential):
                 modules[i].last_lA_list[name] = modules[i].last_lA_list[name][:, mask.squeeze(0), :]
 
 
-        return C_filtered, split_filtered, C_new, 'changed', lb[mask]
+        return domains_filtered, split_filtered, C_new, 'changed', lb[mask]
 
     def get_split_depth(self, batch_size, min_batch_size):
         # Here we check the length of current domain list.
@@ -486,9 +456,9 @@ class BoundedSequential(nn.Sequential):
 
     def BaB(self, x_U = None, x_L = None, n = 2048):
         modules = list(self._modules.values())
-        C = []
+        domains = []
         for i in range(len(modules)):
-            # We only need the bounds before a ReLU/HardTanh layer
+            # We only need the bounds before a ReLU layer
             if isinstance(modules[i], BoundReLU):
                 if isinstance(modules[i - 1], BoundLinear):
                     # add a batch dimension
@@ -500,38 +470,37 @@ class BoundedSequential(nn.Sequential):
                 # Set pre-activation bounds for layer i (the ReLU layer)
                 modules[i].upper_u = ub
                 modules[i].lower_l = lb
-                C.append((lb,ub))
+                domains.append((lb,ub))
         C_matrix = self.get_C(torch.eye(modules[i].out_features).unsqueeze(0).to(x_U),self.labels)
         
-        def get_s(C,device):
+        def get_s(domains,device):
             S = []
-            # print(C[1][1].shape)
-            for C_single in C:                
-                zero_matrix = torch.zeros(C_single[0].shape)
+            for domains_single in domains:                
+                zero_matrix = torch.zeros(domains_single[0].shape)
                 S.append(zero_matrix.to(device))
             return S
-        split_bool = get_s(C,device)
+        split_bool = get_s(domains,device)
 
         print('using beta-CROWN')
 
-        ub, lb = self.optimized_beta_CROWN(C, C_matrix, split_bool, x_U=x_U, x_L=x_L, upper=True, lower=True, optimize=0, name=0)
+        ub, lb = self.optimized_beta_CROWN(domains, C_matrix, split_bool, x_U=x_U, x_L=x_L, upper=True, lower=True, optimize=0, name=0)
         print('result from crown is:',lb)
         if(torch.all(lb>0)):
             print('verified using crown')
             return lb, ub, 'safe'
 
-        ub, alpha_lb = self.optimized_beta_CROWN(C, C_matrix, split_bool, x_U=x_U, x_L=x_L, upper=True, lower=True, optimize=1, name=0)
+        ub, alpha_lb = self.optimized_beta_CROWN(domains, C_matrix, split_bool, x_U=x_U, x_L=x_L, upper=True, lower=True, optimize=1, name=0)
         print('result from alpha crown is:',alpha_lb)
         if(torch.all(lb>0)):
             print('verified using alpha crown')
             return alpha_lb, ub, 'safe'
 
-        C = []
+        domains = []
         unstable_size = 0
         for i in range(len(modules)):
             # We only need the bounds before a ReLU/HardTanh layer
             if isinstance(modules[i], BoundReLU):
-                C.append((modules[i].lb, modules[i].ub))
+                domains.append((modules[i].lb, modules[i].ub))
                 mask = (modules[i].lb < 0) & (modules[i].ub > 0)
                 unstable_size += mask.sum().item()
         print('unstable:',unstable_size)
@@ -544,7 +513,7 @@ class BoundedSequential(nn.Sequential):
             # i = 3
             unstable_remain = unstable_size
             C_new = C_matrix[:,i,:].unsqueeze(1)
-            C_sub = deep_copy_structure(C)
+            domains_sub = deep_copy_structure(domains)
             split_bool_sub = deep_copy_structure(split_bool)
             ret = alpha_lb[:,i]
             name = i+1
@@ -555,7 +524,7 @@ class BoundedSequential(nn.Sequential):
                 print('')
                 print('instance', i, 'is not verified with lb', ret, 'and C', C_new)
 
-                self.initialize_para(modules,C_sub,C_new,split_bool_sub,name,final_start_node)
+                self.initialize_para(modules,domains_sub,C_new,split_bool_sub,name,final_start_node)
                 d = 0
                 ind = 1
                 while(torch.any(ret<0) and C_new.shape[1] <= n):
@@ -573,12 +542,12 @@ class BoundedSequential(nn.Sequential):
                     print('split depth total:', d)
 
                     
-                    C_sub, split_bool_sub, C_new = self.general_split_robustness(C_sub, split_bool_sub, C_new, modules, name, split_depth = real_ss)
+                    domains_sub, split_bool_sub, C_new = self.general_split_robustness(domains_sub, split_bool_sub, C_new, modules, name, split_depth = real_ss)
                     unstable_remain -= real_ss
 
-                    _, ret = self.optimized_beta_CROWN(C_sub, C_new, split_bool_sub, x_U=x_U, x_L=x_L, upper=True, lower=True, optimize=2, name=name)
+                    _, ret = self.optimized_beta_CROWN(domains_sub, C_new, split_bool_sub, x_U=x_U, x_L=x_L, upper=True, lower=True, optimize=2, name=name)
 
-                    C_sub, split_bool_sub, C_new, verified, ret = self.domain_filter_robusness(ret, C_sub, split_bool_sub, C_new, modules, name)
+                    domains_sub, split_bool_sub, C_new, verified, ret = self.domain_filter_robusness(ret, domains_sub, split_bool_sub, C_new, modules, name)
 
                     if(verified == 'verified'):
                         #one batch verified
