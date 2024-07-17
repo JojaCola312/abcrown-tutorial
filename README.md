@@ -9,13 +9,13 @@ pip install numpy
 ```
 
 ## Contents
-- `alpha_beta_CROWN.py`: Implementation of CROWN, alpha-CROWN and beta-CROWN. Function about beta-CROWN including `Bab`, `general_split_robustness`, `domain_filter_robusness`, `optimized_beta_CROWN` and some related sub-function are defined inside `BoundedSequential` class. It will first try incomplete verifier CROWN and alpha-CROWN. If not verified, then try complete verifier beta-CROWN. If all split and still unsafe, then it is verified to be unsafe. If the split domain exceed the pre-defined threshold, then it is unknown. Otherwise, it is verified to be safe.
+- `alpha_beta_CROWN.py`: Implementation of CROWN, alpha-CROWN and beta-CROWN. Function about beta-CROWN including `Bab`, `general_split_robustness`, `domain_filter_robusness`, `optimized_beta_CROWN` and some related sub-function are defined inside `BoundedSequential` class.
 - `linear.py`: Definition of `BoundLinear` class. 
 - `relu_alpha_beta.py`: Definition of `BoundReLU` class. Most functions about ReLU are defined inside the  class.
 - `model.py`: PyTorch model definition.  
-- `models/relu_model.pth`: Pretrained model for debugging. It is only for the relevant complex 2 ReLU model, and the simple toy 1 ReLU model is defined inside `model.py`. 
+- `models/relu_model.pth`: Pretrained model for debugging. It is only for the complex 2 ReLU model, and the parameter of simple 1 ReLU toy model is defined inside `model.py`. 
 
-# Run
+## Run
 ```
 # For 2 ReLU example
 python alpha_beta_CROWN.py data1.pth complex
@@ -23,17 +23,22 @@ python alpha_beta_CROWN.py data1.pth complex
 # For 1 ReLU exmple, data path is not used here
 python alpha_beta_CROWN.py data1.pth toy
 ```
-# CROWN
-## Algorithm
+## Object
+Given an input `x` and an L_inf perturbation, we have the upper bound and the lower bound of the input, noted as `x_U` and `x_L` respectively. Our goal is to compute the lower (or upper) bound for the output of the network. And further for robustness verification, we want to ensure the lower bound for output related to the true label is greater than the upper bound for any other false labels. For our code, it will first try **incomplete verifier CROWN and alpha-CROWN**. If not verified, then try **complete verifier alpha-beta-CROWN**. If all non-linear layer(ReLU) is split and still unsafe, then it is verified to be unsafe. If the amount of domains exceed the pre-defined threshold, then it is said to be unknown. Otherwise, it is verified to be safe. In the following several sections, we will simply introduce the algorithm and structure we used.
 
-## Implementation
+## CROWN
+### Algorithm
+In CROWN, we relax the non-linear layer(ReLU) to linear by bounding it using a linear upper bound and linear lower bound. For non-linear layar, we will first calculate its intermediate bound using backward propagation starting from previous linear layer. After having the intermediate bound for all non-linear layer, we can get two relaxed bounding functions of lower bound and upper bound for each non-linear neuron. Then we can get the relaxed bound for the whole model. The detailed rules and algorithm can be seen in CROWN ([Zhang et al. 2018](https://arxiv.org/pdf/1811.00866))
 
-# Alpha-CROWN
-## Algorithm
+### Implementation
 
-## Implementation
+## Alpha-CROWN
+### Algorithm
+Compared with CROWN, we make the bounding function flexible by using a trainable parameter `alpha` to replace the slope of bounding function for each nueron(For ReLU, we only need to replace the slope of lower bound). After optimizing the `alpha` towards the object, we can get tighter bound. The detailed rules and algorithm can be seen in alpha-CROWN ([Xu et al. 2021](https://arxiv.org/pdf/2011.13824))
 
-# Beta-CROWN
-## Algorithm
+### Implementation
 
-## Implementation
+## Beta-CROWN
+### Algorithm
+
+### Implementation
