@@ -1,4 +1,4 @@
-# Alpha-Beta-CROWN-Robustness-Verification-Tutorial 
+# Alpha-Beta-CROWN Robustness Verification Tutorial 
 This repository contains a simple implementation of roboustness verification using CROWN, alpha-CROWN and beta-CROWN algorithms for fully connected sequential ReLU networks. 
 
 ## Prerequisites 
