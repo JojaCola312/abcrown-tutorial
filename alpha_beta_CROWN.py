@@ -664,23 +664,20 @@ def main():
     # Create the parser
     # device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
     parser = argparse.ArgumentParser()
-    parser.add_argument('-a', '--activation', default='relu', choices=['relu', 'hardtanh'],
-                        type=str, help='Activation Function')
     parser.add_argument('data_file', type=str, help='input data, a tensor saved as a .pth file.')
-    parser.add_argument('data', type=str, help='toy tor toy, complex for complex')
+    parser.add_argument('data', type=str, help='toy tor toy, complex for complex, it is example demo')
     # Parse the command line arguments
     args = parser.parse_args()
 
-    x_test, labels = torch.load(args.data_file)
-    if args.activation == 'relu':
-        print('use ReLU model')
-        if(args.data == 'complex'):
-            model = SimpleNNRelu().to(device)
-            model.load_state_dict(torch.load('models/relu_model.pth'))
-        else:
-            model = two_relu_toy_model(in_dim=2, out_dim=2).to(device)
+    print('use ReLU model')
+    if(args.data == 'complex'):
+        model = SimpleNNRelu().to(device)
+        model.load_state_dict(torch.load('models/relu_model.pth'))
+    else:
+        model = two_relu_toy_model(in_dim=2, out_dim=2).to(device)
 
     if(args.data == 'complex'):
+        x_test, labels = torch.load(args.data_file)
         batch_size = x_test.size(0)
         x_test = x_test.reshape(batch_size, -1).to(device)
         labels = torch.tensor([labels]).long().to(device)

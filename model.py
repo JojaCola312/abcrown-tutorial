@@ -11,16 +11,6 @@ def SimpleNNRelu():
             nn.Linear(64, 10)
     )
 
-
-def SimpleNNHardTanh():
-    return nn.Sequential(
-            nn.Linear(28*28, 128),
-            nn.Hardtanh(),
-            nn.Linear(128, 64),
-            nn.Hardtanh(),
-            nn.Linear(64, 10)
-    )
-
 def two_relu_toy_model(in_dim=2, out_dim=2):
     """A very simple model, 2 inputs, 2 ReLUs, 2 outputs"""
     model = nn.Sequential(
