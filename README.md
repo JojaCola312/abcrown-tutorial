@@ -20,7 +20,7 @@ pip install numpy
 # For 2 ReLU example
 python alpha_beta_CROWN.py data1.pth complex
 
-# For 1 ReLU exmple, data path is not used here
+# For 1 ReLU example, data path is not used here
 python alpha_beta_CROWN.py data1.pth toy
 ```
 ## Object
