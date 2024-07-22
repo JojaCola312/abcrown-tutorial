@@ -59,6 +59,10 @@ class BoundReLU(nn.ReLU):
 
             start_node (int): An integer indicating the start node of this bound propagation.
 
+            optimize (int): 0 for CROWN, 1 for alpha-CROWN, 2 for alpha-beta-CROWN
+
+            out_features (int): the size of output
+
         Returns:
             uA (tensor): The new A for computing the upper bound after taking this layer into account.
 
@@ -176,6 +180,7 @@ class BoundReLU(nn.ReLU):
             v.data = torch.clamp(v.data, min=0)
 
     def update(self, name, optimize, mask):
+        '''update the stored alpha, beta and last_lA list, usually store the best'''
         if(optimize == 2):
             self.last_lA_list[name] = self.last_lA.clone()
             self.last_uA_list[name] = self.last_uA.clone()
@@ -208,6 +213,7 @@ class BoundReLU(nn.ReLU):
 
 
     def inact_alpha(self, start_node):
+        '''fix the alpha that should be 1 or 0'''
         lb = self.lower_l
         ub = self.upper_u
         mask_neg1 = (lb >= 0)
