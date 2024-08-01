@@ -437,9 +437,9 @@ class BoundedSequential(nn.Sequential):
                         print('')
                         break
                     elif(unstable_remain == 0):
-                        #all node split, so it is unknow and need further LP solver to determin, just end the process
-                        print('unknow!!!! All nodes split')
-                        return alpha_lb, ub, 'unknow'
+                        #all node split, so it is unknown and need further LP solver to determin, just end the process
+                        print('unknown!!!! All nodes split')
+                        return alpha_lb, ub, 'unknown'
                     print('length of domains:',len(ret))
                     print('domain remains:', ret)
                 if(verified != 'verified'):
