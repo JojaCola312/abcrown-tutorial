@@ -1,6 +1,5 @@
 import torch
 import torch.nn as nn
-from torch.nn import functional as F
 import numpy as np
 from model import SimpleNNRelu, two_relu_toy_model
 from linear import BoundLinear
@@ -14,6 +13,7 @@ import torch.optim as optim
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
 def deep_copy_structure(structure):
+    """As the sturcture of domains contains tuple and list, using this function to copy them"""
     if isinstance(structure, torch.Tensor):
         return structure.clone().detach()
     elif isinstance(structure, list):
@@ -74,7 +74,7 @@ class BoundedSequential(nn.Sequential):
 
 
     def get_C(self, old_C, labels):
-        '''Get the initial coefficient matrix for robustness verification
+        """Get the initial coefficient matrix for robustness verification
 
         Args:
             old_C (tensor): The initial coefficient matrix, which should be an identical matrix.
@@ -85,7 +85,7 @@ class BoundedSequential(nn.Sequential):
             new_C (tensor): The initial coefficient matrix for robustness verification.
                             Shape should be (1, out_features - 1, out_features)
 
-        '''
+        """
         batch_size, out_features, _ = old_C.shape      
         new_C = torch.zeros((batch_size, out_features - 1, out_features), device=old_C.device)      
         for b in range(batch_size):
@@ -98,7 +98,7 @@ class BoundedSequential(nn.Sequential):
 
 
     def optimized_beta_CROWN(self, domains, C_matrix, split, x_U=None, x_L=None, upper=True, lower=True, optimize=1, name=0):
-        '''Main function to get the optimized bound
+        """Main function to get the optimized bound
 
         Args:
             domains (list): Bounds for different pre-activation layers.
@@ -115,7 +115,7 @@ class BoundedSequential(nn.Sequential):
         Return:
             best_ub (tensor): The final output upper bound.
             best_lb (tensor): The final output lower bound.
-        '''
+        """
         modules = list(self._modules.values())
         ind = 0
         for i in range(len(modules)):
@@ -136,18 +136,17 @@ class BoundedSequential(nn.Sequential):
             return ub, lb
         elif(optimize==1):
             print('using alpha-CROWN')
-            opt = False
+            alpha_params = []
+            lr = 0.1
             for module in modules:
                 if isinstance(module, BoundReLU):
-                    lr = 0.1
-                    if(opt == False):
-                        optimizer = optim.Adam(list(module.alpha_l.values()), lr=lr)
-                        optimizer.add_param_group({'params': list(module.alpha_u.values()),'lr': lr})
-                        opt = True
-                    else:
-                        optimizer.add_param_group({'params': list(module.alpha_l.values()),'lr': lr})
-                        optimizer.add_param_group({'params': list(module.alpha_u.values()),'lr': lr})
+                    alpha_params.extend(list(module.alpha_l.values()))
+                    alpha_params.extend(list(module.alpha_u.values()))
+            optimizer = optim.Adam([
+                {'params': alpha_params, 'lr': lr}
+            ])
             scheduler = optim.lr_scheduler.ExponentialLR(optimizer, 0.98)
+
             iter = 55
             best_lb, best_ub = lb, ub
             #compute lower bound
@@ -169,7 +168,7 @@ class BoundedSequential(nn.Sequential):
                                                 lower=lower, start_node=i, optimize=True, out_features = C_matrix.shape[1])
                 optimizer.zero_grad()
                 loss = -lb.sum()
-                # print('ret:',lb) 
+                # update the pre-activate bound to the best, and update relevant parameter
                 if(torch.any(lb > best_lb)):
                     for i in range(len(modules)):
                         if isinstance(modules[i], BoundReLU):
@@ -196,17 +195,11 @@ class BoundedSequential(nn.Sequential):
                 best_ub = torch.min(best_ub , ub)
             return best_ub, best_lb
         else:
-            
-            # print('split:', split)
-            # print('name:', name)
-            opt = False
             lr_a = 0.01
             lr_b = 0.05
 
             alpha_params = []
             beta_params = []
-            alpha_schedulers = []
-            beta_schedulers = []
 
             for module in modules:
                 if isinstance(module, BoundReLU):
@@ -232,7 +225,6 @@ class BoundedSequential(nn.Sequential):
 
                 optimizer.zero_grad()
                 loss = -lb.sum()                 
-                # print('ret:', lb)
 
                 if(torch.any(lb > best_lb)):
                     for module in modules:
@@ -252,12 +244,11 @@ class BoundedSequential(nn.Sequential):
                 if(torch.all(best_lb > 0)):
                     return best_ub, best_lb
 
-            print('final_ret:',best_lb)
             return best_ub, best_lb
 
 
-    def initialize_para(self, modules, domains, C_new, S, name, start_node):
-        '''initialize the parameter, only be called at the begining of each instance'''
+    def initialize_para(self, modules, name, start_node):
+        """initialize the parameter, only be called at the begining of each instance"""
 
         for i in range(len(modules)):
             if isinstance(modules[i], BoundReLU):
@@ -270,7 +261,7 @@ class BoundedSequential(nn.Sequential):
     
 
     def domain_filter_robusness(self, lb, domains, split_bool, C, modules, name):
-        '''Domain filter after each iteration
+        """Domain filter after each iteration
 
         Args:
             lb (tensor): The lower bound of output
@@ -286,7 +277,7 @@ class BoundedSequential(nn.Sequential):
             split_bool (list): The split logic after filter, the split logic related to the verified instance is removed.
             verify_status (string): 'remain' for unchanges, 'verified' for verified, 'changed' for changing. Only 'verified' is meaningful.
             lb (tensor): The remaining lower bound of inverified instance.
-        '''
+        """
         mask = lb < 0
         #all lbs are smaller than 0, no domain change
         if(torch.all(mask)):
@@ -335,7 +326,7 @@ class BoundedSequential(nn.Sequential):
             return 1
 
     def BaB(self, x_U = None, x_L = None, n = 2048):
-        '''Main function, first try CROWN and alpha-CROWN, then alpha-beta-CROWN
+        """Main function, first try CROWN and alpha-CROWN, then alpha-beta-CROWN
         
         Args:
             x_U (tensor): The upper bound of x.
@@ -345,9 +336,9 @@ class BoundedSequential(nn.Sequential):
         Return:
             lb (tensor): The final output lower bound. Not necessary if finally using alpha-beta-CROWN.
             ub (tensor): The final output upper bound. Not necessary if finally using alpha-beta-CROWN.
-            verified_status (string): 'safe' if all instances are verified. 'unsafe' if there exists instance unsafe. 'unknown'
-                                      if it is not verified within pre-determined domain size.
-        '''
+            verified_status (string): 'safe' if all instances are verified. 'unknown' if it is not verified within 
+                                      pre-determined domain size or all node split.
+        """
         modules = list(self._modules.values())
         domains = []
         for i in range(len(modules)):
@@ -366,6 +357,7 @@ class BoundedSequential(nn.Sequential):
                 domains.append((lb,ub))
         C_matrix = self.get_C(torch.eye(modules[i].out_features).unsqueeze(0).to(x_U),self.labels)
         
+        #get the initial split logic, which should be all 0
         def get_s(domains,device):
             S = []
             for domains_single in domains:                
@@ -374,36 +366,35 @@ class BoundedSequential(nn.Sequential):
             return S
         split_bool = get_s(domains,device)
 
-
+        #try CROWN
         ub, lb = self.optimized_beta_CROWN(domains, C_matrix, split_bool, x_U=x_U, x_L=x_L, upper=True, lower=True, optimize=0, name=0)
-        print('result from crown is:',lb)
+        print('result from CROWN is:',lb)
         if(torch.all(lb>0)):
-            print('verified using crown')
+            print('verified using CROWN')
             return lb, ub, 'safe'
 
+        #try alpha CROWN
         ub, alpha_lb = self.optimized_beta_CROWN(domains, C_matrix, split_bool, x_U=x_U, x_L=x_L, upper=True, lower=True, optimize=1, name=0)
-        print('result from alpha crown is:',alpha_lb)
+        print('result from alpha CROWN is:',alpha_lb)
         if(torch.all(lb>0)):
-            print('verified using alpha crown')
+            print('verified using alpha CROWN')
             return alpha_lb, ub, 'safe'
 
         domains = []
         unstable_size = 0
+        #get the initial domain and unstable size
         for i in range(len(modules)):
-            # We only need the bounds before a ReLU/HardTanh layer
             if isinstance(modules[i], BoundReLU):
                 domains.append((modules[i].lb, modules[i].ub))
                 mask = (modules[i].lb < 0) & (modules[i].ub > 0)
                 unstable_size += mask.sum().item()
-        print('using alpha-beta-crown')
+
+        print('using alpha-beta-CROWN')
         print('size of unstable nuerons:',unstable_size)
         num_out_features = C_matrix.shape[1]
         final_start_node = len(modules) - 1
 
         for i in range(num_out_features):
-            # if(i == 1):
-            #     break
-            # i = 3
             unstable_remain = unstable_size
             C_new = C_matrix[:,i,:].unsqueeze(1)
             domains_sub = deep_copy_structure(domains)
@@ -417,7 +408,7 @@ class BoundedSequential(nn.Sequential):
                 print('')
                 print('instance', i, 'is not verified with lb', ret, 'and C', C_new)
 
-                self.initialize_para(modules,domains_sub,C_new,split_bool_sub,name,final_start_node)
+                self.initialize_para(modules, name, final_start_node)
                 d = 0
                 ind = 1
                 while(torch.any(ret<0) and C_new.shape[1] <= n):
@@ -425,9 +416,7 @@ class BoundedSequential(nn.Sequential):
                     print('Bab round', ind)
                     print('batch:', len(ret))
                     ind+=1
-                    # assert C[0][0] == len(split_bool_list_global)
-                    # assert len(C_list) == C_new.shape[1]
-                    min_batch_size = 204.8
+                    min_batch_size = 204.8 #2048*0.1
                     split_depth = self.get_split_depth(C_new.shape[1], min_batch_size)
                     real_ss = min(split_depth,unstable_remain)
                     d += real_ss
@@ -448,9 +437,9 @@ class BoundedSequential(nn.Sequential):
                         print('')
                         break
                     elif(unstable_remain == 0):
-                        #one batch unsafe, so just end the process
-                        print('unsafe!!!!')
-                        return alpha_lb, ub, 'unsafe'
+                        #all node split, so it is unknow and need further LP solver to determin, just end the process
+                        print('unknow!!!! All nodes split')
+                        return alpha_lb, ub, 'unknow'
                     print('length of domains:',len(ret))
                     print('domain remains:', ret)
                 if(verified != 'verified'):
@@ -483,12 +472,6 @@ class BoundedSequential(nn.Sequential):
         upper_A = C if upper else None
         lower_A = C if lower else None
         upper_sum_b = lower_sum_b = x_U.new([0])
-        # def omega(modules, k, i, device):
-        #     assert(i>k)
-        #     if(i == k):
-        #         return torch.eye(modules[(i-1)*2].out_features).unsqueeze(0).to(device)
-        #     elif:
-        #         o = omega(modules, k-1, i, device)
 
         for i, module in enumerate(reversed(modules)):
             upper_A, upper_b, lower_A, lower_b = module.boundpropogate(upper_A, lower_A, start_node, optimize=optimize, out_features = out_features)
@@ -567,6 +550,7 @@ def main():
         print('')
         print('all batches are verified!')
 
+#print the result in 'try.txt'
 from contextlib import redirect_stdout
 with open('try.txt', 'w') as f:
     with redirect_stdout(f):

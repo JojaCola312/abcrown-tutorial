@@ -31,11 +31,6 @@ def babsr_score(module, linear, name, lb, ub):
     intercept_temp = torch.clamp(ratio, max=0)
     intercept_candidate = intercept_temp * ratio_temp_1.unsqueeze(1)
     b_temp = linear.bias
-
-    # print('btemp',b_temp.shape,b_temp)
-    # print('ratio',ratio.shape,ratio)
-    # print('ratio_temp_0',ratio_temp_0.shape,ratio_temp_0)
-    # print('ratio_temp_1',ratio_temp_1.shape,ratio_temp_1)
     b_temp = b_temp * ratio
 
     ratio_temp_0 = ratio_temp_0.unsqueeze(1)
