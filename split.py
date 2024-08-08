@@ -14,16 +14,21 @@ def compute_ratio(lb, ub):
     return slope_ratio, intercept
 
 def babsr_score(module, linear, name, lb, ub):
-    
-    """Compute branching scores.
-    module: the module for the ReLU layer.
-    linear: the module for the linear layer before ReLU layer, to get the bias.
-    name: the id of the instance
-    lb: lower bounds for one pre-activation layer.
-    ub: upper bounds for one pre-activation layer.
+    r"""Compute branching scores.
+
+    Args:
+        module (BoundReLU): the module for the ReLU layer.
+
+        linear (BoundLinear): the module for the linear layer before ReLU layer, to get the bias.
+
+        name (int): the id of the instance.
+
+        lb (tensor): lower bounds for one pre-activation layer.
+
+        ub (tensor): upper bounds for one pre-activation layer.
 
     return
-    score_candidate: same structure as lb indicates the score for this neuron.
+        score_candidate (tensor): same structure as lb, indicating the score for this neuron.
     """
     shape = module.last_lA_list[name].shape
     ratio = module.last_lA_list[name].view(shape[1],-1,shape[2])
@@ -43,21 +48,31 @@ def babsr_score(module, linear, name, lb, ub):
 
 
 def generate_combinations_with_indices(domains, mask_indices, split_bool, C_matrix, modules, split_depth):
-    """split the domians and modify the parameter based on the topk score
-    domains: list, bounds for different pre-activation layers.
-    mask_indeces: Indices of the elements to be split, it is determined by topk score in each batch.
-    split_bool: list, [split_1, split_2, ...], each split has the same shape with lower bound and the length is the same with domains,
-                indicates the split logic, 0 for no split, -1 for active, 1 for inactive
-    C_matrix: the initial coefficient matrix, the shape is (1, num_batch, num_output)
-    modules: list, [module1, module2, ...], the list of all ReLU layers.
-    split_depth: ind, the split depth.
+    r"""split the domians and modify the parameter based on the topk score.
+
+    Args:
+
+        domains (list): Bounds for different pre-activation layers.
+
+        mask_indices (tensor): Indices of the elements to be split, it is determined by topk score in each batch.
+
+        split_bool (list): [split_1, split_2, ...], each split has the same shape with lower bound and the length is the same with domains,
+                    indicates the split logic, 0 for no split, -1 for active, 1 for inactive.
+
+        C_matrix (tensor): the initial coefficient matrix, the shape is (1, num_batch, num_output)
+
+        modules (list): [module1, module2, ...], the list of all ReLU layers.
+
+        split_depth (int): the split depth.
 
     return
-    new_domains: list, new bounds for different pre-activation layers
-                after split. Length will change based on the split depth, it should be len(domains) * 2 ** split_depth
-    new_split_bool: list, [split_1, split_2, ...], indicates the new split logic after split, 
-                    Length will change based on the split depth, it should be len(domains) * 2 ** split_depth
-    C_matrix_new: the initial coefficient matrix after split, the shape is (1, num_batch * 2 ** split_depth, num_output)
+        new_domains(list): new bounds for different pre-activation layers after split. 
+                           Length will change based on the split depth, it should be len(domains) * 2 ** split_depth
+        
+        new_split_bool (list): [split_1, split_2, ...], indicates the new split logic after split, 
+                        Length will change based on the split depth, it should be len(domains) * 2 ** split_depth
+        
+        C_matrix_new (tensor): the initial coefficient matrix after split, the shape should be (1, num_batch * 2 ** split_depth, num_output)
     """
     batch_size = len(domains)
     num_combinations = 2 ** split_depth
@@ -133,21 +148,31 @@ def generate_combinations_with_indices(domains, mask_indices, split_bool, C_matr
         
 
 def general_split_robustness(domains, split_bool, C_matrix, modules, name, split_depth = 1):
-    """the main function of split for branching
-    domains: list, bounds for different pre-activation layers.
-    split_bool: list, [split_1, split_2, ...], each split has the same shape with lower bound and the length is the same with domains,
-                indicates the split logic, 0 for no split, -1 for active, 1 for inactive
-    C_matrix: the initial coefficient matrix, the shape is (1, num_batch, num_output)
-    modules: list, [module1, module2, ...], the list of all ReLU layers.
-    name: the id of the instance
-    split_depth: ind, the split depth.
+    r"""split the domians and modify the parameter based on the topk score.
+
+    Args:
+
+        domains (list): Bounds for different pre-activation layers.
+
+        split_bool (list): [split_1, split_2, ...], each split has the same shape with lower bound and the length is the same with domains,
+                    indicates the split logic, 0 for no split, -1 for active, 1 for inactive.
+
+        C_matrix (tensor): the initial coefficient matrix, the shape is (1, num_batch, num_output)
+
+        modules (list): [module1, module2, ...], the list of all ReLU layers.
+
+        name (int): the id of the instance
+
+        split_depth (int): the split depth.
 
     return
-    new_domains: list, new bounds for different pre-activation layers
-                after split. Length will change based on the split depth, it should be len(domains) * 2 ** split_depth
-    new_split_bool: list, [split_1, split_2, ...], indicates the new split logic after split, 
-                    Length will change based on the split depth, it should be len(domains) * 2 ** split_depth
-    C_matrix_new: the initial coefficient matrix after split, the shape is (1, num_batch * 2 ** split_depth, num_output)
+        new_domains(list): new bounds for different pre-activation layers after split. 
+                           Length will change based on the split depth, it should be len(domains) * 2 ** split_depth
+        
+        new_split_bool (list): [split_1, split_2, ...], indicates the new split logic after split, 
+                        Length will change based on the split depth, it should be len(domains) * 2 ** split_depth
+        
+        C_matrix_new (tensor): the initial coefficient matrix after split, the shape should be (1, num_batch * 2 ** split_depth, num_output)
     """
     relu_list = []
     linear_list = []

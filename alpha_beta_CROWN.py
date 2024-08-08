@@ -13,7 +13,7 @@ import torch.optim as optim
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
 def deep_copy_structure(structure):
-    """As the sturcture of domains contains tuple and list, using this function to copy them"""
+    r"""As the sturcture of domains contains tuple and list, using this function to copy them"""
     if isinstance(structure, torch.Tensor):
         return structure.clone().detach()
     elif isinstance(structure, list):
@@ -74,17 +74,17 @@ class BoundedSequential(nn.Sequential):
 
 
     def get_C(self, old_C, labels):
-        """Get the initial coefficient matrix for robustness verification
+        r"""Get the initial coefficient matrix for robustness verification
 
         Args:
             old_C (tensor): The initial coefficient matrix, which should be an identical matrix.
                             Shape should be (1, out_features, out_features)
+
             labels (list): The list of true labels
 
         Return:
             new_C (tensor): The initial coefficient matrix for robustness verification.
                             Shape should be (1, out_features - 1, out_features)
-
         """
         batch_size, out_features, _ = old_C.shape      
         new_C = torch.zeros((batch_size, out_features - 1, out_features), device=old_C.device)      
@@ -98,22 +98,31 @@ class BoundedSequential(nn.Sequential):
 
 
     def optimized_beta_CROWN(self, domains, C_matrix, split, x_U=None, x_L=None, upper=True, lower=True, optimize=1, name=0):
-        """Main function to get the optimized bound
+        r"""Main function to get the optimized bound
 
         Args:
             domains (list): Bounds for different pre-activation layers.
-            C_matrix (tensor): The initial coefficient matrix
+
+            C_matrix (tensor): The initial coefficient matrix.
+
             split (list): [split_1, split_2, ...], each split has the same shape with lower bound and the length is the same with domains,
-                            indicates the split logic, 0 for no split, -1 for active, 1 for inactive
+                            indicates the split logic, 0 for no split, -1 for active, 1 for inactive.
+
             x_U (tensor): The upper bound of x.
+
             x_L (tensor): The lower bound of x.
+
             upper (bool): Whether we want upper bound.
+
             lower (bool): Whether we want lower bound.
+
             optimize (int): 0 for CROWN, 1 for alpha-CROWN, 2 for alpha-beta-CROWN.
+
             name (int): id of the instance, 0 for CROWN and alpha-CROWN.
         
         Return:
-            best_ub (tensor): The final output upper bound.
+            best_ub (tensor): The final output upper bound(upper bound doesn't matter in robustness verification task).
+
             best_lb (tensor): The final output lower bound.
         """
         modules = list(self._modules.values())
@@ -134,6 +143,7 @@ class BoundedSequential(nn.Sequential):
         if(optimize==0):
             print('using CROWN')
             return ub, lb
+
         elif(optimize==1):
             print('using alpha-CROWN')
             alpha_params = []
@@ -248,7 +258,7 @@ class BoundedSequential(nn.Sequential):
 
 
     def initialize_para(self, modules, name, start_node):
-        """initialize the parameter, only be called at the begining of each instance"""
+        r"""initialize the parameter, only be called at the begining of each instance"""
 
         for i in range(len(modules)):
             if isinstance(modules[i], BoundReLU):
@@ -261,21 +271,29 @@ class BoundedSequential(nn.Sequential):
     
 
     def domain_filter_robusness(self, lb, domains, split_bool, C, modules, name):
-        """Domain filter after each iteration
+        r"""Domain filter after each iteration
 
         Args:
-            lb (tensor): The lower bound of output
+            lb (tensor): The lower bound of output.
+
             domains (list): Bounds for different pre-activation layers.
+
             split_bool (list): [split_1, split_2, ...], each split has the same shape with lower bound and the length is the same with domains,
                             indicates the split logic, 0 for no split, -1 for active, 1 for inactive
+            
             C (tensor): The initial coefficient matrix
+            
             modules (list): [module1, module2, ...], the list of all ReLU layers.
+            
             name (int): id of the instance
         
         Return:
             domains (list): Bounds for different pre-activation layers after filter, the domains related to the verified instance are removed.
+            
             split_bool (list): The split logic after filter, the split logic related to the verified instance is removed.
+            
             verify_status (string): 'remain' for unchanges, 'verified' for verified, 'changed' for changing. Only 'verified' is meaningful.
+            
             lb (tensor): The remaining lower bound of inverified instance.
         """
         mask = lb < 0
@@ -326,16 +344,20 @@ class BoundedSequential(nn.Sequential):
             return 1
 
     def BaB(self, x_U = None, x_L = None, n = 2048):
-        """Main function, first try CROWN and alpha-CROWN, then alpha-beta-CROWN
+        r"""Main function, first try CROWN and alpha-CROWN, then alpha-beta-CROWN
         
         Args:
             x_U (tensor): The upper bound of x.
+            
             x_L (tensor): The lower bound of x.
+            
             n (int): The threshold of maximum domain size of 'unknown'
         
         Return:
             lb (tensor): The final output lower bound. Not necessary if finally using alpha-beta-CROWN.
+            
             ub (tensor): The final output upper bound. Not necessary if finally using alpha-beta-CROWN.
+            
             verified_status (string): 'safe' if all instances are verified. 'unknown' if it is not verified within 
                                       pre-determined domain size or all node split.
         """
@@ -466,6 +488,7 @@ class BoundedSequential(nn.Sequential):
             start_node (int): The start node of this propagation. It should be a linear layer.
         Returns:
             ub (tensor): The upper bound of the output of start_node.
+
             lb (tensor): The lower bound of the output of start_node.
         """
         modules = list(self._modules.values()) if start_node is None else list(self._modules.values())[:start_node + 1]
@@ -508,35 +531,35 @@ def main():
     # Create the parser
     parser = argparse.ArgumentParser()
     parser.add_argument('data_file', type=str, help='input data, a tensor saved as a .pth file.')
-    parser.add_argument('data', type=str, help='toy tor toy, complex for complex, it is example demo')
+    parser.add_argument('example_demo', type=str, help='toy tor toy, complex for complex, it is for example demo')
     # Parse the command line arguments
     args = parser.parse_args()
 
     print('use ReLU model')
-    if(args.data == 'complex'):
+    if(args.example_demo == 'complex'):
+        #load the complex model
         model = SimpleNNRelu().to(device)
         model.load_state_dict(torch.load('models/relu_model.pth'))
-    else:
-        model = two_relu_toy_model(in_dim=2, out_dim=2).to(device)
-
-    if(args.data == 'complex'):
+        #load the complex data
         x_test, labels = torch.load(args.data_file)
         batch_size = x_test.size(0)
         x_test = x_test.reshape(batch_size, -1).to(device)
         labels = torch.tensor([labels]).long().to(device)
-        output = model(x_test)
-        y_size = output.size(1) - 1
-    else:
-        x_test = torch.tensor([[0., 0.]]).float().to(device)
-        labels = torch.tensor([0]).long().to(device)
-        output = model(x_test)
-        y_size = output.size(1) - 1
-
-    print("Network prediction: {}".format(output))
-    if(args.data == 'complex'):
+        #define the perturbance
         eps = 0.0265
     else:
+        #load the toy model
+        model = two_relu_toy_model(in_dim=2, out_dim=2).to(device)
+        #define the toy data
+        x_test = torch.tensor([[0., 0.]]).float().to(device)
+        labels = torch.tensor([0]).long().to(device)
+        #define the perturbance
         eps = 1
+
+    output = model(x_test)
+    y_size = output.size(1) - 1
+
+    print("Network prediction: {}".format(output))
     x_u = x_test + eps
     x_l = x_test - eps
 

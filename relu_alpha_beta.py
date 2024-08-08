@@ -175,7 +175,7 @@ class BoundReLU(nn.ReLU):
             v.data = torch.clamp(v.data, min=0)
 
     def update(self, name, optimize, mask):
-        """update the stored alpha, beta and last_lA list, usually store the best"""
+        r"""update the stored alpha, beta and last_lA list, usually store the best"""
         if(optimize == 2):
             self.last_lA_list[name] = self.last_lA.clone()
             self.last_uA_list[name] = self.last_uA.clone()
@@ -208,7 +208,7 @@ class BoundReLU(nn.ReLU):
 
 
     def inact_alpha(self, start_node):
-        """fix the alpha that should be 1 or 0"""
+        r"""fix the alpha that should be 1 or 0"""
         lb = self.lower_l
         ub = self.upper_u
         mask_neg1 = (lb >= 0)
