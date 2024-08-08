@@ -13,7 +13,7 @@ import torch.optim as optim
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
 def deep_copy_structure(structure):
-    """As the sturcture of domains contains tuple and list, using this function to copy them"""
+    r"""As the sturcture of domains contains tuple and list, using this function to copy them."""
     if isinstance(structure, torch.Tensor):
         return structure.clone().detach()
     elif isinstance(structure, list):
@@ -74,11 +74,12 @@ class BoundedSequential(nn.Sequential):
 
 
     def get_C(self, old_C, labels):
-        """Get the initial coefficient matrix for robustness verification
+        r"""Get the initial coefficient matrix for robustness verification
 
         Args:
             old_C (tensor): The initial coefficient matrix, which should be an identical matrix.
                             Shape should be (1, out_features, out_features)
+
             labels (list): The list of true labels
 
         Return:
@@ -534,7 +535,7 @@ def main():
 
     print("Network prediction: {}".format(output))
     if(args.data == 'complex'):
-        eps = 0.0265
+        eps = 0.028
     else:
         eps = 1
     x_u = x_test + eps

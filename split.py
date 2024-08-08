@@ -15,15 +15,21 @@ def compute_ratio(lb, ub):
 
 def babsr_score(module, linear, name, lb, ub):
     
-    """Compute branching scores.
-    module: the module for the ReLU layer.
-    linear: the module for the linear layer before ReLU layer, to get the bias.
-    name: the id of the instance
-    lb: lower bounds for one pre-activation layer.
-    ub: upper bounds for one pre-activation layer.
+    r"""Compute branching scores.
+
+    Args:
+        module (BoundReLU): the module for the ReLU layer.
+
+        linear (BoundLinear): the module for the linear layer before ReLU layer, to get the bias.
+
+        name (int): the id of the instance.
+
+        lb (tensor): lower bounds for one pre-activation layer.
+
+        ub (tensor): upper bounds for one pre-activation layer.
 
     return
-    score_candidate: same structure as lb indicates the score for this neuron.
+        score_candidate (tensor): same structure as lb, indicating the score for this neuron.
     """
     shape = module.last_lA_list[name].shape
     ratio = module.last_lA_list[name].view(shape[1],-1,shape[2])
@@ -40,6 +46,36 @@ def babsr_score(module, linear, name, lb, ub):
     score_candidate = (bias_candidate + intercept_candidate).abs()
     return score_candidate
 
+def babsr_score_considernp(module, linear, name, lb, ub):
+    
+    r"""Compute branching scores.
+    module: the module for the ReLU layer.
+    linear: the module for the linear layer before ReLU layer, to get the bias.
+    name: the id of the instance
+    lb: lower bounds for one pre-activation layer.
+    ub: upper bounds for one pre-activation layer.
+
+    return
+    score_candidate: same structure as lb, indicating the score for this neuron.
+    """
+    shape = module.last_lA_list[name].shape
+    ratio = module.last_lA_list[name].view(shape[1],-1,shape[2])
+    ratio_temp_0, ratio_temp_1 = compute_ratio(lb, ub)
+    intercept_temp = torch.clamp(ratio, max=0)
+    intercept_candidate = intercept_temp * ratio_temp_1.unsqueeze(1)
+    b_temp = linear.bias
+
+    ratio_temp_0 = ratio_temp_0.unsqueeze(1)
+    # print('aaaaaaa',ratio)
+    # original = ratio_temp_0 * torch.clamp(ratio, max=0) + ratio_temp_0 * torch.clamp(ratio, min=0)
+    # original = ratio_temp_0 * torch.clamp(ratio, min=0) - ratio_temp_0 * torch.clamp(ratio, max=0)
+    # original = ratio_temp_0 * torch.clamp(ratio, max=0) + module.alpha_l[module.final_start_node].transpose(0, 1) * torch.clamp(ratio, min=0)
+    # original = ratio_temp_0 * torch.clamp(ratio, min=0) + module.alpha_l[module.final_start_node].transpose(0, 1) * torch.clamp(ratio, max=0)
+    bias_candidate_1 = b_temp * original - b_temp * ratio
+    bias_candidate_2 = b_temp * original
+    bias_candidate = torch.max(bias_candidate_1, bias_candidate_2)  # max for babsr by default
+    score_candidate = (bias_candidate + intercept_candidate).abs()
+    return score_candidate
 
 
 def generate_combinations_with_indices(domains, mask_indices, split_bool, C_matrix, modules, split_depth):
@@ -164,11 +200,13 @@ def general_split_robustness(domains, split_bool, C_matrix, modules, name, split
     for single_domains, module, linear in zip(domains, relu_list, linear_list):
         lb, ub = single_domains[0].clone().detach(), single_domains[1].clone().detach()
         mask = (lb < 0) & (ub > 0)
-        score = babsr_score(module, linear, name, lb, ub)
+        # score = babsr_score(module, linear, name, lb, ub)
+        score = babsr_score_considernp(module, linear, name, lb, ub)
         score = score.mean(1)
         score = torch.where(mask, score, torch.tensor(0, device=device))
         scores.append(score)
         i += 1
+    # print('using babsr,', scores)
     def mark_topk_indices(scores, k):
         batch_size = scores[0].size(0)
         flattened_scores = [s.view(batch_size, -1) for s in scores]
